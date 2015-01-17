@@ -1,0 +1,367 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>globallightingdlg</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>globallightingdlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>339</width>
+            <height>504</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Global Lighting Settings</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget" row="3" column="0">
+            <property name="name">
+                <cstring>layout4</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>239</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pOK_Button</cstring>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>140</width>
+                            <height>0</height>
+                        </size>
+                    </property>
+                    <property name="text">
+                        <string>Close</string>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer1_2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>238</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </hbox>
+        </widget>
+        <widget class="QGroupBox" row="1" column="0">
+            <property name="name">
+                <cstring>groupBoxFog</cstring>
+            </property>
+            <property name="title">
+                <string>Fog</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="1" column="0">
+                    <property name="name">
+                        <cstring>textLabelFog2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Fog Start</string>
+                    </property>
+                </widget>
+                <widget class="QSlider" row="1" column="1">
+                    <property name="name">
+                        <cstring>sliderFogStart</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>1000</number>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                </widget>
+                <widget class="QPushButton" row="4" column="1">
+                    <property name="name">
+                        <cstring>pushButtonFogColor</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Click Here</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="4" column="0">
+                    <property name="name">
+                        <cstring>textLabelFog5</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Fog Color</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="2" column="0">
+                    <property name="name">
+                        <cstring>textLabelFog3</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Fog End</string>
+                    </property>
+                </widget>
+                <widget class="QSlider" row="2" column="1">
+                    <property name="name">
+                        <cstring>sliderFogEnd</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>1000</number>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="3" column="0">
+                    <property name="name">
+                        <cstring>textLabelFog4</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Fog Density</string>
+                    </property>
+                </widget>
+                <widget class="QSlider" row="3" column="1">
+                    <property name="name">
+                        <cstring>sliderFogDensity</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>1000</number>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="0" column="1">
+                    <property name="name">
+                        <cstring>comboBoxFogMode</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>textLabelFog1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Fog Mode</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="0" column="0">
+            <property name="name">
+                <cstring>groupBoxBG</cstring>
+            </property>
+            <property name="title">
+                <string>Background</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QPushButton" row="2" column="0">
+                    <property name="name">
+                        <cstring>pushButtonFog2BG</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Copy from Fog Color</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton" row="1" column="0">
+                    <property name="name">
+                        <cstring>pushButtonBG2Fog</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Set as Fog Color</string>
+                    </property>
+                </widget>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout7</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>textLabelBG1</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Background Color</string>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton">
+                            <property name="name">
+                                <cstring>pushButtonBGColor</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Click Here</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="2" column="0">
+            <property name="name">
+                <cstring>groupBoxAO</cstring>
+            </property>
+            <property name="title">
+                <string>Ambient Occlusion</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="1">
+                    <property name="name">
+                        <cstring>layout6</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QComboBox">
+                            <property name="name">
+                                <cstring>comboBoxAOMethod</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QSlider">
+                            <property name="name">
+                                <cstring>sliderAORadius</cstring>
+                            </property>
+                            <property name="minValue">
+                                <number>1</number>
+                            </property>
+                            <property name="maxValue">
+                                <number>1000</number>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                        </widget>
+                        <widget class="QSlider">
+                            <property name="name">
+                                <cstring>sliderAOIntensity</cstring>
+                            </property>
+                            <property name="minValue">
+                                <number>1</number>
+                            </property>
+                            <property name="maxValue">
+                                <number>1000</number>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout5</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>textLabelAO1</cstring>
+                            </property>
+                            <property name="text">
+                                <string>A.O. Method</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>textLabelAO2</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Cavity Radius</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>textLabelAO3</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Intensity</string>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<tabstops>
+    <tabstop>pushButtonBGColor</tabstop>
+    <tabstop>pushButtonBG2Fog</tabstop>
+    <tabstop>pushButtonFog2BG</tabstop>
+    <tabstop>comboBoxFogMode</tabstop>
+    <tabstop>sliderFogStart</tabstop>
+    <tabstop>sliderFogEnd</tabstop>
+    <tabstop>sliderFogDensity</tabstop>
+    <tabstop>pushButtonFogColor</tabstop>
+    <tabstop>comboBoxAOMethod</tabstop>
+    <tabstop>sliderAORadius</tabstop>
+    <tabstop>sliderAOIntensity</tabstop>
+    <tabstop>m_pOK_Button</tabstop>
+</tabstops>
+<slots>
+    <slot>hide()</slot>
+    <slot>setFogMode()</slot>
+    <slot>setFogStart()</slot>
+    <slot>setFogEnd()</slot>
+    <slot>setFogColor()</slot>
+    <slot>getAmbient()</slot>
+    <slot>getFogMode()</slot>
+    <slot>getFogStart()</slot>
+    <slot>getFogColor()</slot>
+    <slot>getFogEnd()</slot>
+    <slot>getFogDensity()</slot>
+    <slot>setFogDensity()</slot>
+    <slot>setAOMethod()</slot>
+    <slot>getAORadiusScaling()</slot>
+    <slot>setAORadiusScaling()</slot>
+    <slot>getAOMethod()</slot>
+    <slot>setAOIntensity()</slot>
+    <slot>getAOIntensity()</slot>
+    <slot>setBGColor()</slot>
+    <slot>setBG2Fog()</slot>
+    <slot>setFog2BG()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

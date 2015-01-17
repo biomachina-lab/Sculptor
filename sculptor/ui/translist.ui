@@ -1,0 +1,204 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>TransList</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>TransList</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>409</width>
+            <height>332</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Transformation List</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QListBox" row="0" column="0">
+            <property name="name">
+                <cstring>m_pList</cstring>
+            </property>
+        </widget>
+        <widget class="QLayoutWidget" row="2" column="0">
+            <property name="name">
+                <cstring>layout3</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pRename</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Rename</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pClear</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Clear</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pRefine</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
+                    <property name="text">
+                        <string>Refine</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pClose</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Close</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget" row="1" column="0">
+            <property name="name">
+                <cstring>layout4</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pAdd</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Add</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pRemove</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Remove</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pUp</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Up</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pDown</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Down</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>m_pAdd</sender>
+        <signal>clicked()</signal>
+        <receiver>TransList</receiver>
+        <slot>addTransform()</slot>
+    </connection>
+    <connection>
+        <sender>m_pRemove</sender>
+        <signal>clicked()</signal>
+        <receiver>TransList</receiver>
+        <slot>removeTransform()</slot>
+    </connection>
+    <connection>
+        <sender>m_pList</sender>
+        <signal>selected(int)</signal>
+        <receiver>TransList</receiver>
+        <slot>applyTransform()</slot>
+    </connection>
+    <connection>
+        <sender>m_pRename</sender>
+        <signal>clicked()</signal>
+        <receiver>TransList</receiver>
+        <slot>renameTransform()</slot>
+    </connection>
+    <connection>
+        <sender>m_pUp</sender>
+        <signal>clicked()</signal>
+        <receiver>TransList</receiver>
+        <slot>upTransform()</slot>
+    </connection>
+    <connection>
+        <sender>m_pDown</sender>
+        <signal>clicked()</signal>
+        <receiver>TransList</receiver>
+        <slot>downTransform()</slot>
+    </connection>
+    <connection>
+        <sender>m_pRefine</sender>
+        <signal>clicked()</signal>
+        <receiver>TransList</receiver>
+        <slot>refine()</slot>
+    </connection>
+    <connection>
+        <sender>m_pClose</sender>
+        <signal>clicked()</signal>
+        <receiver>TransList</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>m_pClear</sender>
+        <signal>clicked()</signal>
+        <receiver>TransList</receiver>
+        <slot>clearTransforms()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>m_pList</tabstop>
+    <tabstop>m_pAdd</tabstop>
+    <tabstop>m_pRemove</tabstop>
+    <tabstop>m_pUp</tabstop>
+    <tabstop>m_pDown</tabstop>
+    <tabstop>m_pRename</tabstop>
+    <tabstop>m_pClear</tabstop>
+    <tabstop>m_pRefine</tabstop>
+    <tabstop>m_pClose</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in declaration">sculptor_document.h</include>
+    <include location="local" impldecl="in declaration">qinputdialog.h</include>
+    <include location="local" impldecl="in declaration">qfiledialog.h</include>
+    <include location="local" impldecl="in implementation">translist.ui.h</include>
+</includes>
+<variables>
+    <variable access="public">sculptor_document* m_pDoc;</variable>
+</variables>
+<slots>
+    <slot>addTransform()</slot>
+    <slot>removeTransform()</slot>
+    <slot>refine()</slot>
+    <slot>setAsDocked()</slot>
+    <slot>applyTransform()</slot>
+    <slot>renameTransform()</slot>
+    <slot>upTransform()</slot>
+    <slot>downTransform()</slot>
+    <slot>clearTransforms()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

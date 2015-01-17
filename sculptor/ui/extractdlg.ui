@@ -1,0 +1,163 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>ExtractDlg</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>ExtractDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>348</width>
+            <height>118</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Extract from PDB</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget" row="1" column="0">
+            <property name="name">
+                <cstring>layout2</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pExtract</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Extract</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pCancel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Cancel</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QFrame" row="0" column="0">
+            <property name="name">
+                <cstring>m_pFrame</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Raised</enum>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout2</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>textLabel1</cstring>
+                            </property>
+                            <property name="maximumSize">
+                                <size>
+                                    <width>60</width>
+                                    <height>32767</height>
+                                </size>
+                            </property>
+                            <property name="text">
+                                <string>Extract:</string>
+                            </property>
+                        </widget>
+                        <widget class="QComboBox">
+                            <item>
+                                <property name="text">
+                                    <string>Chain</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property name="text">
+                                    <string>Model</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property name="text">
+                                    <string>Frame</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property name="text">
+                                    <string>Carbon Alpha</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property name="text">
+                                    <string>Backbone</string>
+                                </property>
+                            </item>
+                            <property name="name">
+                                <cstring>m_pMethod</cstring>
+                            </property>
+                            <property name="currentItem">
+                                <number>0</number>
+                            </property>
+                        </widget>
+                        <widget class="QComboBox">
+                            <item>
+                                <property name="text">
+                                    <string>All</string>
+                                </property>
+                            </item>
+                            <property name="name">
+                                <cstring>m_pSelection</cstring>
+                            </property>
+                            <property name="minimumSize">
+                                <size>
+                                    <width>75</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                            <property name="sizeLimit">
+                                <number>20</number>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>m_pExtract</sender>
+        <signal>clicked()</signal>
+        <receiver>ExtractDlg</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>m_pCancel</sender>
+        <signal>clicked()</signal>
+        <receiver>ExtractDlg</receiver>
+        <slot>reject()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>m_pMethod</tabstop>
+    <tabstop>m_pSelection</tabstop>
+    <tabstop>m_pExtract</tabstop>
+    <tabstop>m_pCancel</tabstop>
+</tabstops>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

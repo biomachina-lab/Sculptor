@@ -1,0 +1,27 @@
+/* XPM */
+static const char *propIcon[] = {
+/* width height num_colors chars_per_pixel */
+"    13    16        4            1",
+/* colors */
+". c #000000",
+"# c #666666",
+"a c #aaaaaa",
+"b c #dadada",
+/* pixels */
+".............",
+".bbbbbbbbbbb.",
+".baaaaaaaaa#.",
+".ba######aa#.",
+".baaaaaaaaa#.",
+".ba#####aaa#.",
+".baaaaaaaaa#.",
+".ba##aaaaaa#.",
+".baaaaaaaaa#.",
+".ba####aaaa#.",
+".baaaaaaaaa#.",
+".baaaaaaaaa#.",
+".baaaaa###a#.",
+".baaaaaaaaa#.",
+".b##########.",
+"............."
+};

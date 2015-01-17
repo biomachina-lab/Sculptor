@@ -1,0 +1,266 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>ColmapDlgSecStruct</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>ColmapDlgSecStruct</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>389</width>
+            <height>225</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Adjust Colormapping</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>11</number>
+        </property>
+        <property name="spacing">
+            <number>6</number>
+        </property>
+        <widget class="QGroupBox" row="0" column="0">
+            <property name="name">
+                <cstring>GroupBox21</cstring>
+            </property>
+            <property name="title">
+                <string></string>
+            </property>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>m_pButtonColorChange</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>11</x>
+                        <y>41</y>
+                        <width>345</width>
+                        <height>26</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Change Color</string>
+                </property>
+            </widget>
+            <widget class="QComboBox">
+                <property name="name">
+                    <cstring>m_pComboColorName</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>187</x>
+                        <y>11</y>
+                        <width>169</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>m_pStaticColorName</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>11</x>
+                        <y>11</y>
+                        <width>170</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Name:</string>
+                </property>
+            </widget>
+        </widget>
+        <widget class="QGroupBox" row="1" column="0">
+            <property name="name">
+                <cstring>GroupBox21_2</cstring>
+            </property>
+            <property name="title">
+                <string></string>
+            </property>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>textLabel1_2</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>40</y>
+                        <width>270</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Min Number of Residues per Helix</string>
+                </property>
+                <property name="toolTip" stdset="0">
+                    <string>If a helix consists of less residues, it will be rendered as turn.</string>
+                </property>
+            </widget>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>textLabel1</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>10</y>
+                        <width>270</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Min Number of Residues per Sheet</string>
+                </property>
+                <property name="toolTip" stdset="0">
+                    <string>If a sheet consists of less residues, it will be rendered as a turn.</string>
+                </property>
+            </widget>
+            <widget class="QSpinBox">
+                <property name="name">
+                    <cstring>spinBoxSheetRes</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>290</x>
+                        <y>10</y>
+                        <width>71</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="maxValue">
+                    <number>999999</number>
+                </property>
+                <property name="minValue">
+                    <number>1</number>
+                </property>
+            </widget>
+            <widget class="QSpinBox">
+                <property name="name">
+                    <cstring>spinBoxHelixRes</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>290</x>
+                        <y>40</y>
+                        <width>71</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="maxValue">
+                    <number>999999</number>
+                </property>
+                <property name="minValue">
+                    <number>1</number>
+                </property>
+            </widget>
+        </widget>
+        <widget class="QLayoutWidget" row="2" column="0">
+            <property name="name">
+                <cstring>Layout16</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <spacer>
+                    <property name="name">
+                        <cstring>Spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>PushButton34</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Ok</string>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>Spacer2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </hbox>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>PushButton34</sender>
+        <signal>clicked()</signal>
+        <receiver>ColmapDlgSecStruct</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>spinBoxHelixRes</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>ColmapDlgSecStruct</receiver>
+        <slot>setMinResPerHelix()</slot>
+    </connection>
+    <connection>
+        <sender>spinBoxSheetRes</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>ColmapDlgSecStruct</receiver>
+        <slot>setMinResPerSheet()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>m_pComboColorName</tabstop>
+    <tabstop>m_pButtonColorChange</tabstop>
+    <tabstop>spinBoxSheetRes</tabstop>
+    <tabstop>spinBoxHelixRes</tabstop>
+    <tabstop>PushButton34</tabstop>
+</tabstops>
+<includes>
+    <include location="global" impldecl="in declaration">svt_pdb.h</include>
+</includes>
+<variables>
+    <variable>svt_pdb * m_pPdbNode;</variable>
+</variables>
+<slots>
+    <slot>setMinResPerHelix()</slot>
+    <slot>setMinResPerSheet()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

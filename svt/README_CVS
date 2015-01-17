@@ -1,0 +1,11 @@
+Every working SenSitus/SVT revision should be tagged. That means not necessarily
+only the distributed versions, but also internal test versions. The content in the cvs should be
+checked in daily, but therefore the current CVS content might be not working.
+Every week there should be an effort to create a version that is (at least somewhat) stable. These revisions should get their own tag.
+
+"rev-0-90" stands for revision 0.90
+"rel-0-95" stands for release 0.95
+
+As - at least for now - Sculptor and SVT are linked very closely together, both should get
+the same tags. If SVT is used more intensively also in other projects in the future, this might change.
+

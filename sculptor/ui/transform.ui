@@ -1,0 +1,503 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>TransformDlg</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>TransformDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>399</width>
+            <height>382</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Add Transformation</string>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>true</bool>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>11</number>
+        </property>
+        <property name="spacing">
+            <number>6</number>
+        </property>
+        <widget class="QLayoutWidget" row="2" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>Layout1</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pButtonApply</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Apply</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pButtonOk</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Close</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QGroupBox" row="0" column="0">
+            <property name="name">
+                <cstring>GroupBox1</cstring>
+            </property>
+            <property name="title">
+                <string>Translation X:</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>11</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>Layout12</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <property name="margin">
+                            <number>0</number>
+                        </property>
+                        <property name="spacing">
+                            <number>6</number>
+                        </property>
+                        <widget class="QDial">
+                            <property name="name">
+                                <cstring>m_pDialTransX</cstring>
+                            </property>
+                            <property name="minValue">
+                                <number>-999</number>
+                            </property>
+                            <property name="maxValue">
+                                <number>999</number>
+                            </property>
+                            <property name="lineStep">
+                                <number>1</number>
+                            </property>
+                            <property name="pageStep">
+                                <number>10</number>
+                            </property>
+                        </widget>
+                        <widget class="QSpinBox">
+                            <property name="name">
+                                <cstring>m_pSpinBoxTransX</cstring>
+                            </property>
+                            <property name="maxValue">
+                                <number>999</number>
+                            </property>
+                            <property name="minValue">
+                                <number>-999</number>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="0" column="1">
+            <property name="name">
+                <cstring>GroupBox1_2</cstring>
+            </property>
+            <property name="title">
+                <string>Translation Y:</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>11</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>Layout13</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <property name="margin">
+                            <number>0</number>
+                        </property>
+                        <property name="spacing">
+                            <number>6</number>
+                        </property>
+                        <widget class="QDial">
+                            <property name="name">
+                                <cstring>m_pDialTransY</cstring>
+                            </property>
+                            <property name="minValue">
+                                <number>-999</number>
+                            </property>
+                            <property name="maxValue">
+                                <number>999</number>
+                            </property>
+                        </widget>
+                        <widget class="QSpinBox">
+                            <property name="name">
+                                <cstring>m_pSpinBoxTransY</cstring>
+                            </property>
+                            <property name="maxValue">
+                                <number>999</number>
+                            </property>
+                            <property name="minValue">
+                                <number>-999</number>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="0" column="2">
+            <property name="name">
+                <cstring>GroupBox1_3</cstring>
+            </property>
+            <property name="title">
+                <string>Translation Z:</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>11</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>Layout14</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <property name="margin">
+                            <number>0</number>
+                        </property>
+                        <property name="spacing">
+                            <number>6</number>
+                        </property>
+                        <widget class="QDial">
+                            <property name="name">
+                                <cstring>m_pDialTransZ</cstring>
+                            </property>
+                            <property name="minValue">
+                                <number>-999</number>
+                            </property>
+                            <property name="maxValue">
+                                <number>999</number>
+                            </property>
+                        </widget>
+                        <widget class="QSpinBox">
+                            <property name="name">
+                                <cstring>m_pSpinBoxTransZ</cstring>
+                            </property>
+                            <property name="maxValue">
+                                <number>999</number>
+                            </property>
+                            <property name="minValue">
+                                <number>-999</number>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="1" column="0">
+            <property name="name">
+                <cstring>GroupBox1_4</cstring>
+            </property>
+            <property name="title">
+                <string>Rotation X:</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>11</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>Layout15</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <property name="margin">
+                            <number>0</number>
+                        </property>
+                        <property name="spacing">
+                            <number>6</number>
+                        </property>
+                        <widget class="QDial">
+                            <property name="name">
+                                <cstring>m_pDialRotX</cstring>
+                            </property>
+                            <property name="minValue">
+                                <number>-180</number>
+                            </property>
+                            <property name="maxValue">
+                                <number>180</number>
+                            </property>
+                        </widget>
+                        <widget class="QSpinBox">
+                            <property name="name">
+                                <cstring>m_pSpinBoxRotX</cstring>
+                            </property>
+                            <property name="maxValue">
+                                <number>999</number>
+                            </property>
+                            <property name="minValue">
+                                <number>-999</number>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="1" column="1">
+            <property name="name">
+                <cstring>GroupBox1_4_2</cstring>
+            </property>
+            <property name="title">
+                <string>Rotation Y:</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>11</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>Layout16</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <property name="margin">
+                            <number>0</number>
+                        </property>
+                        <property name="spacing">
+                            <number>6</number>
+                        </property>
+                        <widget class="QDial">
+                            <property name="name">
+                                <cstring>m_pDialRotY</cstring>
+                            </property>
+                            <property name="minValue">
+                                <number>-180</number>
+                            </property>
+                            <property name="maxValue">
+                                <number>180</number>
+                            </property>
+                        </widget>
+                        <widget class="QSpinBox">
+                            <property name="name">
+                                <cstring>m_pSpinBoxRotY</cstring>
+                            </property>
+                            <property name="maxValue">
+                                <number>999</number>
+                            </property>
+                            <property name="minValue">
+                                <number>-999</number>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="1" column="2">
+            <property name="name">
+                <cstring>GroupBox1_4_3</cstring>
+            </property>
+            <property name="title">
+                <string>Rotation Z:</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>11</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>Layout17</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <property name="margin">
+                            <number>0</number>
+                        </property>
+                        <property name="spacing">
+                            <number>6</number>
+                        </property>
+                        <widget class="QDial">
+                            <property name="name">
+                                <cstring>m_pDialRotZ</cstring>
+                            </property>
+                            <property name="minValue">
+                                <number>-180</number>
+                            </property>
+                            <property name="maxValue">
+                                <number>180</number>
+                            </property>
+                        </widget>
+                        <widget class="QSpinBox">
+                            <property name="name">
+                                <cstring>m_pSpinBoxRotZ</cstring>
+                            </property>
+                            <property name="maxValue">
+                                <number>999</number>
+                            </property>
+                            <property name="minValue">
+                                <number>-999</number>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>m_pButtonOk</sender>
+        <signal>clicked()</signal>
+        <receiver>TransformDlg</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>m_pDialTransY</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pSpinBoxTransY</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pDialTransX</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pSpinBoxTransX</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pDialTransZ</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pSpinBoxTransZ</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pDialRotX</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pSpinBoxRotX</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pDialRotY</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pSpinBoxRotY</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pDialRotZ</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pSpinBoxRotZ</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pSpinBoxTransX</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pDialTransX</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pSpinBoxTransY</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pDialTransY</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pSpinBoxTransZ</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pDialTransZ</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pSpinBoxRotX</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pDialRotX</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pSpinBoxRotY</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pDialRotY</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pSpinBoxRotZ</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>m_pDialRotZ</receiver>
+        <slot>setValue(int)</slot>
+    </connection>
+</connections>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

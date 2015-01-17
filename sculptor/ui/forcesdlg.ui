@@ -1,0 +1,489 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>ForceDlg</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>ForceDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>376</width>
+            <height>552</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Force Feedback Properties</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QGroupBox" row="1" column="0">
+            <property name="name">
+                <cstring>GroupBox8</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>Box</enum>
+            </property>
+            <property name="title">
+                <string>Disable Forces</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout18</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>m_pCheckTransX</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Enable Translational Forces (X-Axis)</string>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>m_pCheckTransY</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Enable Translational Forces (Y-Axis)</string>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>m_pCheckTransZ</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Enable Translational Forces (Z-Axis)</string>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>m_pCheckRotX</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Enable Rotational Forces (X-Axis)</string>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>m_pCheckRotY</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Enable Rotational Forces (Y-Axis)</string>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>m_pCheckRotZ</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Enable Rotational Forces (Z-Axis)</string>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QFrame" row="0" column="0">
+            <property name="name">
+                <cstring>Frame7</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>Box</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout16</cstring>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLayoutWidget" row="2" column="0">
+                            <property name="name">
+                                <cstring>layout11</cstring>
+                            </property>
+                            <vbox>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <widget class="QLabel">
+                                    <property name="name">
+                                        <cstring>StericInteractionThresholds</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Steric Interaction Thresholds (in Angstrom):</string>
+                                    </property>
+                                </widget>
+                                <widget class="QLayoutWidget">
+                                    <property name="name">
+                                        <cstring>layout5</cstring>
+                                    </property>
+                                    <hbox>
+                                        <property name="name">
+                                            <cstring>unnamed</cstring>
+                                        </property>
+                                        <widget class="QLayoutWidget">
+                                            <property name="name">
+                                                <cstring>layout3</cstring>
+                                            </property>
+                                            <hbox>
+                                                <property name="name">
+                                                    <cstring>unnamed</cstring>
+                                                </property>
+                                                <widget class="QLabel">
+                                                    <property name="name">
+                                                        <cstring>GoodThreshold</cstring>
+                                                    </property>
+                                                    <property name="text">
+                                                        <string>Good:</string>
+                                                    </property>
+                                                </widget>
+                                                <widget class="QLineEdit">
+                                                    <property name="name">
+                                                        <cstring>m_pEditStericGoodThreshold</cstring>
+                                                    </property>
+                                                    <property name="minimumSize">
+                                                        <size>
+                                                            <width>50</width>
+                                                            <height>0</height>
+                                                        </size>
+                                                    </property>
+                                                    <property name="alignment">
+                                                        <set>AlignRight</set>
+                                                    </property>
+                                                </widget>
+                                            </hbox>
+                                        </widget>
+                                        <widget class="QLayoutWidget">
+                                            <property name="name">
+                                                <cstring>layout4</cstring>
+                                            </property>
+                                            <hbox>
+                                                <property name="name">
+                                                    <cstring>unnamed</cstring>
+                                                </property>
+                                                <widget class="QLabel">
+                                                    <property name="name">
+                                                        <cstring>ClashThreshold</cstring>
+                                                    </property>
+                                                    <property name="text">
+                                                        <string>Clash:</string>
+                                                    </property>
+                                                </widget>
+                                                <widget class="QLineEdit">
+                                                    <property name="name">
+                                                        <cstring>m_pEditStericClashThreshold</cstring>
+                                                    </property>
+                                                    <property name="minimumSize">
+                                                        <size>
+                                                            <width>50</width>
+                                                            <height>0</height>
+                                                        </size>
+                                                    </property>
+                                                    <property name="alignment">
+                                                        <set>AlignRight</set>
+                                                    </property>
+                                                </widget>
+                                            </hbox>
+                                        </widget>
+                                    </hbox>
+                                </widget>
+                            </vbox>
+                        </widget>
+                        <widget class="QLayoutWidget" row="1" column="0">
+                            <property name="name">
+                                <cstring>layout15</cstring>
+                            </property>
+                            <grid>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <widget class="QSlider" row="2" column="1">
+                                    <property name="name">
+                                        <cstring>m_pSliderScaleStericForce</cstring>
+                                    </property>
+                                    <property name="value">
+                                        <number>40</number>
+                                    </property>
+                                    <property name="orientation">
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                </widget>
+                                <widget class="QSlider" row="3" column="1">
+                                    <property name="name">
+                                        <cstring>m_pSliderScaleCentralSphere</cstring>
+                                    </property>
+                                    <property name="value">
+                                        <number>40</number>
+                                    </property>
+                                    <property name="orientation">
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                </widget>
+                                <widget class="QLabel" row="4" column="0">
+                                    <property name="name">
+                                        <cstring>textLabel2_2</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Scale Arrow:</string>
+                                    </property>
+                                </widget>
+                                <widget class="QLabel" row="0" column="0">
+                                    <property name="name">
+                                        <cstring>TextLabel2_3</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Scale Translations:</string>
+                                    </property>
+                                </widget>
+                                <widget class="QLabel" row="1" column="0">
+                                    <property name="name">
+                                        <cstring>TextLabel2</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Scale CC Forces:</string>
+                                    </property>
+                                </widget>
+                                <widget class="QSlider" row="1" column="1">
+                                    <property name="name">
+                                        <cstring>m_pSliderScaleCorrForce</cstring>
+                                    </property>
+                                    <property name="value">
+                                        <number>40</number>
+                                    </property>
+                                    <property name="orientation">
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                </widget>
+                                <widget class="QSlider" row="4" column="1">
+                                    <property name="name">
+                                        <cstring>m_pSliderScaleForceArrow</cstring>
+                                    </property>
+                                    <property name="value">
+                                        <number>40</number>
+                                    </property>
+                                    <property name="orientation">
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                </widget>
+                                <widget class="QLabel" row="3" column="0">
+                                    <property name="name">
+                                        <cstring>textLabel2</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Central Sphere:</string>
+                                    </property>
+                                </widget>
+                                <widget class="QSlider" row="0" column="1">
+                                    <property name="name">
+                                        <cstring>m_pSliderScaleTranslation</cstring>
+                                    </property>
+                                    <property name="value">
+                                        <number>40</number>
+                                    </property>
+                                    <property name="orientation">
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                </widget>
+                                <widget class="QLabel" row="2" column="0">
+                                    <property name="name">
+                                        <cstring>TextLabel2_2</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Scale Steric Forces:</string>
+                                    </property>
+                                </widget>
+                            </grid>
+                        </widget>
+                        <widget class="QLayoutWidget" row="3" column="0">
+                            <property name="name">
+                                <cstring>layout10</cstring>
+                            </property>
+                            <vbox>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <widget class="QLabel">
+                                    <property name="name">
+                                        <cstring>textLabel3</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Central Sphere Color Function:</string>
+                                    </property>
+                                </widget>
+                                <widget class="QLayoutWidget">
+                                    <property name="name">
+                                        <cstring>layout9</cstring>
+                                    </property>
+                                    <hbox>
+                                        <property name="name">
+                                            <cstring>unnamed</cstring>
+                                        </property>
+                                        <widget class="QLayoutWidget">
+                                            <property name="name">
+                                                <cstring>layout6</cstring>
+                                            </property>
+                                            <hbox>
+                                                <property name="name">
+                                                    <cstring>unnamed</cstring>
+                                                </property>
+                                                <widget class="QLabel">
+                                                    <property name="name">
+                                                        <cstring>textLabel1</cstring>
+                                                    </property>
+                                                    <property name="text">
+                                                        <string>Red</string>
+                                                    </property>
+                                                </widget>
+                                                <widget class="QSpinBox">
+                                                    <property name="name">
+                                                        <cstring>m_pSpinSphereColorFunctionRed</cstring>
+                                                    </property>
+                                                    <property name="maxValue">
+                                                        <number>1000</number>
+                                                    </property>
+                                                    <property name="value">
+                                                        <number>1000</number>
+                                                    </property>
+                                                </widget>
+                                            </hbox>
+                                        </widget>
+                                        <widget class="QLayoutWidget">
+                                            <property name="name">
+                                                <cstring>layout7</cstring>
+                                            </property>
+                                            <hbox>
+                                                <property name="name">
+                                                    <cstring>unnamed</cstring>
+                                                </property>
+                                                <widget class="QLabel">
+                                                    <property name="name">
+                                                        <cstring>textLabel1_3</cstring>
+                                                    </property>
+                                                    <property name="text">
+                                                        <string>Blue</string>
+                                                    </property>
+                                                </widget>
+                                                <widget class="QSpinBox">
+                                                    <property name="name">
+                                                        <cstring>m_pSpinSphereColorFunctionBlue</cstring>
+                                                    </property>
+                                                    <property name="maxValue">
+                                                        <number>1000</number>
+                                                    </property>
+                                                    <property name="value">
+                                                        <number>1000</number>
+                                                    </property>
+                                                </widget>
+                                            </hbox>
+                                        </widget>
+                                        <widget class="QLayoutWidget">
+                                            <property name="name">
+                                                <cstring>layout8</cstring>
+                                            </property>
+                                            <hbox>
+                                                <property name="name">
+                                                    <cstring>unnamed</cstring>
+                                                </property>
+                                                <widget class="QLabel">
+                                                    <property name="name">
+                                                        <cstring>textLabel1_2</cstring>
+                                                    </property>
+                                                    <property name="text">
+                                                        <string>Green</string>
+                                                    </property>
+                                                </widget>
+                                                <widget class="QSpinBox">
+                                                    <property name="name">
+                                                        <cstring>m_pSpinSphereColorFunctionGreen</cstring>
+                                                    </property>
+                                                    <property name="maxValue">
+                                                        <number>1000</number>
+                                                    </property>
+                                                    <property name="value">
+                                                        <number>1000</number>
+                                                    </property>
+                                                </widget>
+                                            </hbox>
+                                        </widget>
+                                    </hbox>
+                                </widget>
+                            </vbox>
+                        </widget>
+                        <widget class="QLayoutWidget" row="0" column="0">
+                            <property name="name">
+                                <cstring>layout14</cstring>
+                            </property>
+                            <hbox>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <widget class="QCheckBox">
+                                    <property name="name">
+                                        <cstring>m_pCheckNegButton</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Switch Button Logic</string>
+                                    </property>
+                                    <property name="toolTip" stdset="0">
+                                        <string>If checked no force is generated if the button is pressed</string>
+                                    </property>
+                                </widget>
+                                <widget class="QCheckBox">
+                                    <property name="name">
+                                        <cstring>m_pCheckForceArrow</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Force Arrow</string>
+                                    </property>
+                                    <property name="toolTip" stdset="0">
+                                        <string>If checked no force is generated if the button is pressed</string>
+                                    </property>
+                                </widget>
+                            </hbox>
+                        </widget>
+                    </grid>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<tabstops>
+    <tabstop>m_pCheckNegButton</tabstop>
+    <tabstop>m_pCheckForceArrow</tabstop>
+    <tabstop>m_pSliderScaleTranslation</tabstop>
+    <tabstop>m_pSliderScaleCorrForce</tabstop>
+    <tabstop>m_pSliderScaleStericForce</tabstop>
+    <tabstop>m_pSliderScaleCentralSphere</tabstop>
+    <tabstop>m_pSliderScaleForceArrow</tabstop>
+    <tabstop>m_pEditStericGoodThreshold</tabstop>
+    <tabstop>m_pEditStericClashThreshold</tabstop>
+    <tabstop>m_pSpinSphereColorFunctionRed</tabstop>
+    <tabstop>m_pSpinSphereColorFunctionBlue</tabstop>
+    <tabstop>m_pSpinSphereColorFunctionGreen</tabstop>
+    <tabstop>m_pCheckTransX</tabstop>
+    <tabstop>m_pCheckTransY</tabstop>
+    <tabstop>m_pCheckTransZ</tabstop>
+    <tabstop>m_pCheckRotX</tabstop>
+    <tabstop>m_pCheckRotY</tabstop>
+    <tabstop>m_pCheckRotZ</tabstop>
+</tabstops>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

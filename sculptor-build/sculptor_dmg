@@ -1,0 +1,405 @@
+#!/bin/sh
+
+###############################################################################
+# Sculptor MacOSX packager
+# see sculptor.biomachina.org for details
+###############################################################################
+
+function printError
+{
+	echo -e "\033[31m[ERROR!]\033[0m"
+        echo
+        echo -e "---------------------------------------------------------------------"
+        echo -e "The last 10-lines of the compiler-output (compileOut.txt):"
+        echo
+        cat compileOut.txt | sed -e :a -e '$q;N;11,$D;ba'
+        echo
+        echo -e "---------------------------------------------------------------------"
+        echo -e "And the last 10-lines of the configure-output:"
+        echo
+        cat configureOut.txt | sed -e :a -e '$q;N;11,$D;ba'
+        echo
+        echo -e "---------------------------------------------------------------------"
+        echo
+        exit
+}
+
+###############################################################################
+# Create Directories
+###############################################################################
+function createDir
+{
+	# create directory-structure
+	if [ -e "$WORK_DIR" ]
+	then
+		echo -en "\033[1mCreating     :\033[0m Top-level directory"
+		echo -e "\t \033[32m[FOUND]\033[0m"
+		cd $WORK_DIR
+	else        
+		echo -en "\033[1mCreating     :\033[0m Top-level directory"
+		mkdir -p $WORK_DIR
+		echo -e "\t \033[32m[OK]\033[0m"
+		cd $WORK_DIR
+        fi
+        
+	if [ -e "sculptor_dmg" ]
+	then
+		echo -en "\033[1mCreating     :\033[0m Build directory"
+		echo -e "\t\t \033[32m[FOUND]\033[0m"
+		cd sculptor_dmg
+	else        
+		echo -en "\033[1mCreating     :\033[0m Build directory"
+        	mkdir sculptor_dmg
+		echo -e "\t\t \033[32m[OK]\033[0m"
+		cd sculptor_dmg
+        fi
+
+	# checkout source
+	if [ -e "svt" ]
+	then
+		echo -en "\033[1mCreating     :\033[0m SVT source"
+		echo -e "\t\t \033[32m[FOUND]\033[0m"
+        else
+		echo -en "\033[1mCreating     :\033[0m SVT source"
+		cvs -Q co svt
+		echo -e "\t\t \033[32m[OK]\033[0m"
+        fi
+        
+	if [ -e "sculptor" ]
+	then
+		echo -en "\033[1mCreating     :\033[0m Sculptor source"
+		echo -e "\t\t \033[32m[FOUND]\033[0m"
+        else
+		echo -en "\033[1mCreating     :\033[0m Sculptor source"
+		cvs -Q co sculptor
+		echo -e "\t\t \033[32m[OK]\033[0m"
+        fi
+}
+
+###############################################################################
+# QT4
+###############################################################################
+function compileQT4
+{
+	echo -en "\033[1mCompiling now:\033[0m Qt4"
+
+	# already compiled?
+	if [ -e "$QTDIR/lib/libQtGui.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+    
+	    	# cvs checkout
+                if [ -d "qt4-mac" ]
+                then
+			cd qt4
+                        make confclean &> /dev/null
+                else
+			cvs -Q co qt4
+			cd qt4
+                fi
+                echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		mkdir include &> /dev/null; cd include && rm -f q*.h; ln -s ../src/*/q*.h .; ln -s ../extensions/*/src/q*.h .; rm q*_p.h ; mkdir private &> /dev/null; cd private && rm -f q*.h; ln -s ../../src/*/q*.h .; ln -s ../../extensions/*/src/q*.h . ; cd ../..
+		echo -e "o \n yes" | ./configure -opensource -static -no-stl -release -fast -no-framework -no-qt3support -prefix $QTDIR &> configureOut.txt
+                echo -en "\033[32m[CONF]\033[0m"
+        
+		# compile
+		make sub-src &> compileOut.txt
+
+		if [ -e "$QTDIR/lib/libQtGui.a" ]
+		then
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	          	exit
+		fi
+
+		cd ..
+        fi
+}
+
+###############################################################################
+# QWT5
+###############################################################################
+function compileQWT5
+{
+	echo -en "\033[1mCompiling now:\033[0m QWT5"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libqwt.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs checkout
+                if [ -d "qwt" ]
+                then
+			cd qwt       
+                        make clean &> /dev/null
+                else
+			cvs -Q co qwt5
+                        ln -s qwt5 qwt
+			cd qwt   
+                        mkdir include
+			mkdir include/qwt
+			cp src/*.h include/qwt/
+                fi
+               	echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		qmake -after "CONFIG+=staticlib" "CONFIG-=dll" "QMAKE_CFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" "QMAKE_CXXFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" &> qmakeOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+
+		if [ -e "lib/libqwt.a" ]
+		then
+			cp lib/libqwt.a $SVT_DIR/lib/
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	          	exit
+		fi
+
+                cd ..
+        fi
+}
+
+###############################################################################
+# SVT
+###############################################################################
+function compileSVT
+{
+	echo -en "\033[1mCompiling now\033[0m: SVT..."
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libsvt_pdb.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs
+		cd svt
+	        echo -en "\t\t\t \033[32m[---]\033[0m"
+        
+		# configure                                       
+		make distclean &> /dev/null
+	        make distclean &> /dev/null
+	        make distclean &> /dev/null
+		qmake -after "CONFIG+=staticlib" "CONFIG-=dll" "QMAKE_CFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" "QMAKE_CXXFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" &> configureOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+
+		# compile
+		make &> compileOut.txt
+
+		if [ -e "lib/libsvt_pdb.a" ]
+		then
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	        	exit
+		fi        
+
+		cd ..
+        fi
+}
+
+###############################################################################
+# Sculptor
+###############################################################################
+function compileSculptor
+{
+	echo -en "\033[1mCompiling now\033[0m: Sculptor..."
+
+	# already compiled?
+	if [ -e "sculptor/Sculptor.app/Contents/MacOS/Sculptor" ]
+	then
+          	echo -e "\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs
+		cd sculptor
+	        echo -en "\t\t \033[32m[---]\033[0m"
+        
+	        # configure
+		make distclean &> /dev/null
+		qmake -after "QMAKE_CFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" "QMAKE_CXXFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" "QMAKE_LFLAGS_RELEASE += $SVT_RELEASE_LFLAGS" &> qmakeOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+
+		if [ -e "Sculptor.app/Contents/MacOS/Sculptor" ]
+		then
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+	        	printError
+	                exit
+		fi      
+       
+	        cd ..
+                echo
+        fi
+}
+
+
+###############################################################################
+# Create Bundle
+###############################################################################
+function createBundle
+{
+	VERSION=`cat $WORK_DIR/sculptor_dmg/sculptor/include/sculptor_version.h | awk '/SCULPTOR_VERSION/ {print $3}' | sed s/\"//g`
+	MAJORVERSION=`cat $WORK_DIR/sculptor_dmg/sculptor/include/sculptor_version.h | awk '/SCULPTOR_VERSION/ {print $3}' | sed s/\"//g | sed 's/\./ /' | awk '{print $1}'`
+
+	BUNDLE_SOURCE="$WORK_DIR/sculptor_dmg/sculptor/Sculptor.app"
+	BUNDLE_NAME="Sculptor.app"
+	DISK_IMAGE="sculptor_${VERSION}.dmg"
+	MOUNTED_DISK_NAME="Sculptor ${VERSION}"
+
+	#output function
+	croak()
+	{
+		echo -en "\033[1mDMG Bundle   \033[0m: "
+  		echo -e  "$1"
+	}
+
+	#return error message
+	chkerror()
+	{
+	  	if [ $? -ne 0 ]; then
+    			croak "Error!"
+    			exit 1
+  		fi
+	}
+
+	# change into build directory
+	cd $WORK_DIR/sculptor_dmg/sculptor/
+
+	#check binary does not depend on xslt, xml2, or qt
+	croak "Checking dependencies..."
+	if [ -n "`otool -L Sculptor.app/Contents/MacOS/Sculptor | egrep '(xslt.dylib|xml2.dylib|libqt.dylib)'`" ]; then
+
+		XSLT=`otool -L Sculptor.app/Contents/MacOS/Sculptor | grep xslt`
+		XML2=`otool -L Sculptor.app/Contents/MacOS/Sculptor | grep xml2`
+		QT=`otool -L Sculptor.app/Contents/MacOS/Sculptor | grep libqt`
+
+		croak "Binary is not completely static!"
+		croak $XSLT
+		croak $XML2
+		croak $QT
+		exit 1
+	fi
+
+	#make sure all resources and frameworks are placed in bundle
+	croak "Copying Cg framework into bundle"
+        mkdir Sculptor.app/Contents &> /dev/null
+	mkdir Sculptor.app/Contents/Frameworks &> /dev/null
+	cp -R /Library/Frameworks/Cg.framework Sculptor.app/Contents/Frameworks &> /dev/null
+        cp -R $QTDIR/src/gui/mac/qt_menu.nib Sculptor.app/Contents/Resources/ &> /dev/null
+
+	cd $WORK_DIR
+
+	#estimate space required for disk image
+	SIZE=`du -s -k $BUNDLE_SOURCE | awk '{print $1}'`
+	chkerror
+	SIZE=`expr 5 + $SIZE / 1000`
+	chkerror
+	croak "Using $SIZE MB"
+
+	#remove old disk and sparse images if they exist
+	rm -f ${DISK_IMAGE}
+	rm -rf ${DISK_IMAGE}.sparseimage
+
+	#create sparse image
+	hdiutil create "${DISK_IMAGE}.sparseimage" -volname "${MOUNTED_DISK_NAME}" -megabytes $SIZE -type SPARSE -fs HFS+ 2>/dev/null >/dev/null
+	chkerror
+	croak "${DISK_IMAGE}.sparseimage created"
+
+	#mount sparse image
+	hdiutil mount ./${DISK_IMAGE}.sparseimage 2>/dev/null >/dev/null
+	chkerror
+	croak "${DISK_IMAGE}.sparseimage mounted"
+
+	#find out allocated device
+	DEV=`mount | grep "Volumes/${MOUNTED_DISK_NAME}" | awk '{print $1}'`
+	croak "Device in use is $DEV"
+
+	# Use ditto to copy everything to the image, preserving resource forks
+	ditto -rsrcFork $BUNDLE_SOURCE "/Volumes/${MOUNTED_DISK_NAME}/${BUNDLE_NAME}" 2>/dev/null >/dev/null
+	chkerror
+	croak "Bundle copied over successfully"
+
+	# Copy over the disk image background and hide it
+	#BACKGROUND="resources/icons/as128.png"
+	#ditto -rsrcFork $BACKGROUND "/Volumes/$MOUNTED_DISK_NAME/diskImageBackground.png" 2>/dev/null >/dev/null
+	#/Developer/Tools/SetFile -a V "/Volumes/$MOUNTED_DISK_NAME/diskImageBackground.png" 2>/dev/null >/dev/null
+	#chkerror
+	#croak "Disk image background copied, hide, and set"
+
+	# Detach the disk image
+	hdiutil detach $DEV 2>/dev/null >/dev/null
+	chkerror
+	croak "$DEV detached"
+
+	# Compress the image (maximum compression)
+	hdiutil convert "${DISK_IMAGE}.sparseimage" -format UDZO -o "${DISK_IMAGE}" -imagekey zlib-devel=9 2>/dev/null >/dev/null
+	chkerror
+	croak "Disk image successfully compressed"
+
+	#remove sparseimage folder
+	croak "Removing ${DISK_IMAGE}.sparseimage"
+	rm -rf ${DISK_IMAGE}.sparseimage
+
+	#make disk image interent enabled and announce being done
+	hdiutil internet-enable -yes ${DISK_IMAGE} 2>/dev/null >/dev/null
+	chkerror
+	croak "${DISK_IMAGE} created!"
+}
+
+###################################################################################################
+# Main Script
+###################################################################################################
+
+echo 
+echo -e "\033[1mSculptor MacOSX Distribution Build-Script\033[0m"
+echo "-----------------------------------------"
+echo
+echo "The build takes a _very_ long time, depending on the CPU and network speed, ~30min - 1 hour."
+echo
+
+# environment variables
+export CURR_DIR=`pwd`
+export CURR_DATE=`date +%Y-%m-%d`
+export SVT_RELEASE=RELEASE
+export SVT_PLATFORM=macosxintel
+export WORK_DIR=$HOME/sculptor_release_build
+export TOP_BUILD_DIR=$WORK_DIR/sculptor_dmg
+export CVSROOT=:ext:$USER@cvs-biomachina:/srv/cvs
+export CVS_RSH=ssh
+
+export SVT_DIR=$TOP_BUILD_DIR/svt
+export QTDIR=$TOP_BUILD_DIR/qt4
+export QWT_DIR=$TOP_BUILD_DIR/qwt5
+
+export PATH=$QTDIR/bin:$PATH
+export QMAKESPEC=macx-g++
+
+export GCCVER=`gcc -dumpversion`
+export PROCARCH=`uname -p`
+
+# make top level dir
+createDir
+cd $TOP_BUILD_DIR
+# qt
+compileQT4
+# qwt
+compileQWT5
+# svt
+compileSVT
+# sculptor
+compileSculptor
+# create bundle
+createBundle

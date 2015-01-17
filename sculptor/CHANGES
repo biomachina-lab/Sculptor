@@ -1,0 +1,81 @@
+0.991
+=====
+
+Renamed to Sculptor
+
+09/27/06 * 3D cursor can be turned on/off (default: off) - setting is stored in the state file
+09/27/06 * Menuitems re-grouped, view menubar.
+09/27/06 * File open dialog filters also for *.sit, not only for *.situs.
+09/27/06 * Separate menu items "Load State" and "Save State" in addition to directly saving the sculptor scene document.
+09/27/06 * Property dialogs can only be opened once.
+10/02/06 * Property dialogs are no long children of the main window - the main window will no longer pop-up when they are activated.
+10/02/06 * Transfer function editor widget colors were changed: White background, histogram dark grey, axis title font smaller.
+10/02/06 * Isosurface treshold values can be adjusted 
+10/02/06 * True transparency using multi-pass rendering was added.
+10/03/06 * Multiple files can be loaded at once.
+10/03/06 * In the pdb options dialog an "apply automatically" was added.
+10/03/06 * Right-click into main window - crash fixed.
+10/03/06 * Rendering modes of the pdb document are stored in the state file.
+10/04/06 * Only either the isosurface or the DVR can be visible.
+10/04/06 * Clustering, Feature-based docking, bond determination and powell have now progress bars and can be canceled.
+10/05/06 * Change of solid color in pdb documents works again.
+10/07/06 * Global rendering mode changes for pdb documents can now easily be done using the new data submenu.
+10/08/06 * Global coloring modes for pdb documents can now also be selected in the data menu.
+10/08/06 * In case of a solid color, the eye in the document list gets a little border with the same color.
+10/08/06 * Tab order for pdb and volume option dialog was changed - the info tab was moved to the last position.
+10/09/06 * Center button.
+10/09/06 * Icons in toolbar added for global rendering modes and solid color.
+10/09/06 * Single toolbar instead of a string of tiny toolbars.
+10/09/06 * PDB import and bond calculation improved.
+10/09/06 * Toggle the visible status is now correctly applied to all selected documents.
+10/09/06 * If a non-clusterable document (e.g. the scene) is selected and cluster analysis is executed, the program does not hang anymore and gives a warning.
+10/09/06 * If a different coloring scheme is selected the document list is correctly redrawn.
+10/09/06 * Color of the isosurfaces is also shown in the document list as rectangle around the eyeball - but only if isosurface is visible.
+10/09/06 * If one takes a screenshot, Sculptor will open a file dialog.
+10/09/06 * Forces do work again.
+10/12/06 * The colormapping in the pdb rendering is now completely palette based.
+10/12/06 * The box in the volumetric documents is turned off by default.
+
+0.9.9
+=====
+
+Last version of SenSitus before move to Sculptor!
+
+02/07/06 * Fixed bug that caused SenSitus to crash when an extension is loaded.
+01/20/06 * Fixed bug that caused SenSitus to consume all available CPU time.
+
+0.9.3
+=====
+
+04/20/04 * Cross section mode completely overworked. Scaling is now correct.
+04/20/04 * Histogram plot overworked. One can now save and print the histogram.
+04/19/04 * OpenInventor output for SVT.
+04/xx/04 * Mesh simplification integrated into SVT.
+03/xx/04 * L.I.V.E. Phantom ported to Linux (GHOST/Linux)
+01/xx/04 * L.I.V.E. now - finally - fully integrated into SVT.
+
+0.9.2
+=====
+
+11/19/03 * configuration file parser completely overworked.
+11/14/03 * the "test" messages in statusbar replaced
+
+0.9.1
+=====
+
+11/11/03 * if FPS > 200 it is ignored, and no longer displayed.
+11/11/03 * added AlwaysRedraw (default false) config variable
+11/10/03 * fixed a bug in the intro code (caused crashes under windows)
+11/03/03 * sensitus.iss changed so that qwt.dll also gets installed on Windows systems.
+10/30/03 * QPDB atoms are recognized as codebook vectors and no longer bonded to other atoms.
+10/30/03 * intro screen removed, the error message about the missing fonts is gone now.
+10/30/03 * live warning about missing live.cfg removed.
+10/30/03 * the file dialog is always opened in the directory where the last file was loaded or saved
+10/30/03 * file fus.log is no longer created.
+10/22/03 * several bugs in the bond calculation fixed.
+10/21/03 * online help deactived as the old document doesnt match the current version of SenSitus.
+
+0.9.0
+=====
+
+* pre 0.9.0 entries deleted.

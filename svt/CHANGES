@@ -1,0 +1,23 @@
+SVT changes:
+============
+
+SB = Stefan Birmanns
+MB = Maik Boltes
+HZ = Herwig Zilken
+EE = Erik Enquist
+PB = Paul Boyle
+OP = Oliver Passon
+VM = Valerio Mariani
+
+------------
+
+12/2005 - SB: volume rendering code extensively updated, now using shader programs
+03/2005 - MB: svt_mesh handels colored vertices also during simplification
+03/2005 - SB: volume rendering code (3D textures) overhauled
+02/2005 - MB: added PLY format for loading meshes (normal, triangle strips also with colors)
+02/2005 - SB: mesh simplification code overhauled
+01/2005 - SB: changed svt_rectangle to a plane like object
+01/2005 - SB: added svt_setMousePos() and svt_getMousePos() to system/window
+01/2005 - SB: changed svt_matrix streaming to matlab/octave format
+12/2004 - SB: nxn matrix inversion by Gauss-Jordan elimination added
+12/2004 - SB: added svt_rnd to system (random number generator)

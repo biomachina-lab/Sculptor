@@ -1,0 +1,12 @@
+#
+# Devices
+#
+FeedbackDevice = falcon
+ 
+FeedbackMatrixChannel = 1
+FeedbackButtonChannel = 2
+FeedbackAuxButton1Channel = 3
+FeedbackAuxButton2Channel = 4
+FeedbackForceXChannel = 5
+FeedbackForceYChannel = 6
+FeedbackForceZChannel = 7

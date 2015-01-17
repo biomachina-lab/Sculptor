@@ -1,0 +1,669 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>GaDlg</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>GaDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>378</width>
+            <height>517</height>
+        </rect>
+    </property>
+    <property name="sizePolicy">
+        <sizepolicy>
+            <hsizetype>5</hsizetype>
+            <vsizetype>5</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+    </property>
+    <property name="caption">
+        <string>Simultaneous Multi-Domain Fitting</string>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>true</bool>
+    </property>
+    <property name="modal">
+        <bool>false</bool>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="resizeMode">
+            <enum>Fixed</enum>
+        </property>
+        <widget class="QTabWidget" row="0" column="0">
+            <property name="name">
+                <cstring>tabWidget2</cstring>
+            </property>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Basic Settings</string>
+                </attribute>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QFrame" row="0" column="0">
+                        <property name="name">
+                            <cstring>m_pAdvancedFrame_3</cstring>
+                        </property>
+                        <property name="frameShape">
+                            <enum>NoFrame</enum>
+                        </property>
+                        <property name="frameShadow">
+                            <enum>Plain</enum>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QGroupBox" row="0" column="0">
+                                <property name="name">
+                                    <cstring>groupBox3</cstring>
+                                </property>
+                                <property name="title">
+                                    <string></string>
+                                </property>
+                                <grid>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QLabel" row="0" column="0">
+                                        <property name="name">
+                                            <cstring>m_pResolutionLabel</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Resolution of Map:</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLineEdit" row="0" column="1">
+                                        <property name="name">
+                                            <cstring>m_pResolution</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>15</string>
+                                        </property>
+                                    </widget>
+                                </grid>
+                            </widget>
+                            <widget class="QGroupBox" row="1" column="0">
+                                <property name="name">
+                                    <cstring>groupBox1_2</cstring>
+                                </property>
+                                <property name="title">
+                                    <string>Optimization</string>
+                                </property>
+                                <grid>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QSpinBox" row="0" column="1">
+                                        <property name="name">
+                                            <cstring>m_pPopSize</cstring>
+                                        </property>
+                                        <property name="wrapping">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="buttonSymbols">
+                                            <enum>UpDownArrows</enum>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>50000</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>1</number>
+                                        </property>
+                                        <property name="lineStep">
+                                            <number>10</number>
+                                        </property>
+                                        <property name="value">
+                                            <number>50</number>
+                                        </property>
+                                    </widget>
+                                    <widget class="QSpinBox" row="1" column="1">
+                                        <property name="name">
+                                            <cstring>m_pMaxGen</cstring>
+                                        </property>
+                                        <property name="wrapping">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="buttonSymbols">
+                                            <enum>UpDownArrows</enum>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>10000</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>1</number>
+                                        </property>
+                                        <property name="lineStep">
+                                            <number>25</number>
+                                        </property>
+                                        <property name="value">
+                                            <number>3500</number>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="2">
+                                        <property name="name">
+                                            <cstring>m_pShowFitnessCurve</cstring>
+                                        </property>
+                                        <property name="enabled">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="text">
+                                            <string>Show Fitness Curve</string>
+                                        </property>
+                                        <property name="checked">
+                                            <bool>false</bool>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="0" column="0">
+                                        <property name="name">
+                                            <cstring>m_pPopSizeLabel</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Population Size:</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="1" column="0">
+                                        <property name="name">
+                                            <cstring>m_pGenLabel</cstring>
+                                        </property>
+                                        <property name="focusPolicy">
+                                            <enum>NoFocus</enum>
+                                        </property>
+                                        <property name="text">
+                                            <string>Generations:</string>
+                                        </property>
+                                    </widget>
+                                </grid>
+                            </widget>
+                            <widget class="QGroupBox" row="3" column="0">
+                                <property name="name">
+                                    <cstring>groupBox1</cstring>
+                                </property>
+                                <property name="title">
+                                    <string>Score Function</string>
+                                </property>
+                                <grid>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QLayoutWidget" row="1" column="0">
+                                        <property name="name">
+                                            <cstring>layout8</cstring>
+                                        </property>
+                                        <hbox>
+                                            <property name="name">
+                                                <cstring>unnamed</cstring>
+                                            </property>
+                                            <spacer>
+                                                <property name="name">
+                                                    <cstring>spacer2</cstring>
+                                                </property>
+                                                <property name="orientation">
+                                                    <enum>Horizontal</enum>
+                                                </property>
+                                                <property name="sizeType">
+                                                    <enum>Expanding</enum>
+                                                </property>
+                                                <property name="sizeHint">
+                                                    <size>
+                                                        <width>40</width>
+                                                        <height>20</height>
+                                                    </size>
+                                                </property>
+                                            </spacer>
+                                            <widget class="QCheckBox">
+                                                <property name="name">
+                                                    <cstring>m_pUseComputedCV</cstring>
+                                                </property>
+                                                <property name="enabled">
+                                                    <bool>true</bool>
+                                                </property>
+                                                <property name="text">
+                                                    <string>Use Computed Vectors</string>
+                                                </property>
+                                                <property name="checked">
+                                                    <bool>false</bool>
+                                                </property>
+                                            </widget>
+                                        </hbox>
+                                    </widget>
+                                    <widget class="QCheckBox" row="0" column="0">
+                                        <property name="name">
+                                            <cstring>m_pCVScore</cstring>
+                                        </property>
+                                        <property name="enabled">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="text">
+                                            <string>Feature-Based Scoring</string>
+                                        </property>
+                                        <property name="checked">
+                                            <bool>true</bool>
+                                        </property>
+                                    </widget>
+                                </grid>
+                            </widget>
+                            <widget class="QGroupBox" row="2" column="0">
+                                <property name="name">
+                                    <cstring>groupBox4_2</cstring>
+                                </property>
+                                <property name="title">
+                                    <string>Multi-Thread</string>
+                                </property>
+                                <grid>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QLabel" row="0" column="0">
+                                        <property name="name">
+                                            <cstring>m_pThreadsLabel</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Threads:</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="1" column="0">
+                                        <property name="name">
+                                            <cstring>m_pSyncGenLabel</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Generations/Parallel Run:</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QSpinBox" row="0" column="1">
+                                        <property name="name">
+                                            <cstring>m_pMaxThread</cstring>
+                                        </property>
+                                        <property name="wrapping">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="buttonSymbols">
+                                            <enum>UpDownArrows</enum>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>16</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>1</number>
+                                        </property>
+                                        <property name="lineStep">
+                                            <number>1</number>
+                                        </property>
+                                        <property name="value">
+                                            <number>4</number>
+                                        </property>
+                                    </widget>
+                                    <widget class="QSpinBox" row="1" column="1">
+                                        <property name="name">
+                                            <cstring>m_pSyncGen</cstring>
+                                        </property>
+                                        <property name="wrapping">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="buttonSymbols">
+                                            <enum>UpDownArrows</enum>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>10000</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>1</number>
+                                        </property>
+                                        <property name="lineStep">
+                                            <number>10</number>
+                                        </property>
+                                        <property name="value">
+                                            <number>100</number>
+                                        </property>
+                                    </widget>
+                                </grid>
+                            </widget>
+                        </grid>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Advanced Settings</string>
+                </attribute>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QGroupBox" row="1" column="0">
+                        <property name="name">
+                            <cstring>groupBox4_3</cstring>
+                        </property>
+                        <property name="title">
+                            <string>Score Penalties</string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel" row="0" column="0">
+                                <property name="name">
+                                    <cstring>m_pGeneDistanceLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Distance:</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="1" column="0">
+                                <property name="name">
+                                    <cstring>m_pPenaltyLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Penalty:</string>
+                                </property>
+                            </widget>
+                            <widget class="QLineEdit" row="1" column="1">
+                                <property name="name">
+                                    <cstring>m_pDistancePenalty</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>0.9</string>
+                                </property>
+                            </widget>
+                            <widget class="QLineEdit" row="0" column="1">
+                                <property name="name">
+                                    <cstring>m_pDistanceThreshold</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>10.0</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QGroupBox" row="0" column="0">
+                        <property name="name">
+                            <cstring>groupBox4</cstring>
+                        </property>
+                        <property name="title">
+                            <string>Tabu Search</string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel" row="0" column="0">
+                                <property name="name">
+                                    <cstring>m_pWindowSizeLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Window Size:</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="1" column="0">
+                                <property name="name">
+                                    <cstring>m_pThreasholdLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Threshold:</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="2" column="0">
+                                <property name="name">
+                                    <cstring>m_pRegionSize</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Region Size:</string>
+                                </property>
+                            </widget>
+                            <widget class="QLineEdit" row="2" column="1">
+                                <property name="name">
+                                    <cstring>m_pTabuRegionSize</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>3.0</string>
+                                </property>
+                            </widget>
+                            <widget class="QLineEdit" row="1" column="1">
+                                <property name="name">
+                                    <cstring>m_pTabuThreshold</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>0.5</string>
+                                </property>
+                            </widget>
+                            <widget class="QLineEdit" row="0" column="1">
+                                <property name="name">
+                                    <cstring>m_pTabuWindowSize</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>30</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QGroupBox" row="3" column="0">
+                        <property name="name">
+                            <cstring>groupBox4_4</cstring>
+                        </property>
+                        <property name="title">
+                            <string>Output and Statistics</string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLayoutWidget" row="1" column="0" rowspan="1" colspan="2">
+                                <property name="name">
+                                    <cstring>layout6</cstring>
+                                </property>
+                                <hbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QLabel">
+                                        <property name="name">
+                                            <cstring>m_pLocation</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Dir:</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLineEdit">
+                                        <property name="name">
+                                            <cstring>m_pOutputPath</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QPushButton">
+                                        <property name="name">
+                                            <cstring>m_pSelectOutputDir</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>...</string>
+                                        </property>
+                                    </widget>
+                                </hbox>
+                            </widget>
+                            <widget class="QSpinBox" row="2" column="1">
+                                <property name="name">
+                                    <cstring>m_pWriteModelInterval</cstring>
+                                </property>
+                                <property name="wrapping">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="buttonSymbols">
+                                    <enum>UpDownArrows</enum>
+                                </property>
+                                <property name="maxValue">
+                                    <number>50000</number>
+                                </property>
+                                <property name="minValue">
+                                    <number>0</number>
+                                </property>
+                                <property name="lineStep">
+                                    <number>5</number>
+                                </property>
+                                <property name="value">
+                                    <number>50</number>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="0" column="0">
+                                <property name="name">
+                                    <cstring>m_pOutput</cstring>
+                                </property>
+                                <property name="enabled">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="text">
+                                    <string>Output Solutions</string>
+                                </property>
+                                <property name="checked">
+                                    <bool>false</bool>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="2" column="0">
+                                <property name="name">
+                                    <cstring>m_pPopSizeLabel_2</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Write Statistics Interval:</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QGroupBox" row="2" column="0">
+                        <property name="name">
+                            <cstring>groupBox4_4_2</cstring>
+                        </property>
+                        <property name="title">
+                            <string>Sampling Around Centers</string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QCheckBox" row="0" column="0">
+                                <property name="name">
+                                    <cstring>m_pSample</cstring>
+                                </property>
+                                <property name="enabled">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="text">
+                                    <string>Sample Population</string>
+                                </property>
+                                <property name="checked">
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget class="QSpinBox" row="0" column="1">
+                                <property name="name">
+                                    <cstring>m_pPopAroundCenters</cstring>
+                                </property>
+                                <property name="wrapping">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="buttonSymbols">
+                                    <enum>UpDownArrows</enum>
+                                </property>
+                                <property name="maxValue">
+                                    <number>50000</number>
+                                </property>
+                                <property name="minValue">
+                                    <number>0</number>
+                                </property>
+                                <property name="lineStep">
+                                    <number>5</number>
+                                </property>
+                                <property name="value">
+                                    <number>50</number>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </grid>
+            </widget>
+        </widget>
+        <widget class="QLayoutWidget" row="1" column="0">
+            <property name="name">
+                <cstring>layout3</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pRunGa</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Execute</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>pushButton1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Cancel</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>pushButton1</sender>
+        <signal>clicked()</signal>
+        <receiver>GaDlg</receiver>
+        <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>m_pRunGa</sender>
+        <signal>clicked()</signal>
+        <receiver>GaDlg</receiver>
+        <slot>accept()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>tabWidget2</tabstop>
+    <tabstop>m_pResolution</tabstop>
+    <tabstop>m_pPopSize</tabstop>
+    <tabstop>m_pMaxGen</tabstop>
+    <tabstop>m_pShowFitnessCurve</tabstop>
+    <tabstop>m_pMaxThread</tabstop>
+    <tabstop>m_pSyncGen</tabstop>
+    <tabstop>m_pCVScore</tabstop>
+    <tabstop>m_pUseComputedCV</tabstop>
+    <tabstop>m_pRunGa</tabstop>
+    <tabstop>pushButton1</tabstop>
+    <tabstop>m_pTabuWindowSize</tabstop>
+    <tabstop>m_pTabuThreshold</tabstop>
+    <tabstop>m_pTabuRegionSize</tabstop>
+    <tabstop>m_pDistanceThreshold</tabstop>
+    <tabstop>m_pDistancePenalty</tabstop>
+    <tabstop>m_pSample</tabstop>
+    <tabstop>m_pPopAroundCenters</tabstop>
+    <tabstop>m_pOutput</tabstop>
+    <tabstop>m_pOutputPath</tabstop>
+    <tabstop>m_pSelectOutputDir</tabstop>
+    <tabstop>m_pWriteModelInterval</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in declaration">sculptor_document.h</include>
+</includes>
+<variables>
+    <variable access="public">vector&lt;sculptor_document*&gt;* m_pSelectedPdbs;</variable>
+    <variable access="public">vector&lt;sculptor_document*&gt;* m_pSelectedSitus;</variable>
+</variables>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

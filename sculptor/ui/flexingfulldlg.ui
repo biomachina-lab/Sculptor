@@ -1,0 +1,420 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>FlexingFullDlg</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>FlexingFullDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>481</width>
+            <height>381</height>
+        </rect>
+    </property>
+    <property name="sizePolicy">
+        <sizepolicy>
+            <hsizetype>5</hsizetype>
+            <vsizetype>5</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+    </property>
+    <property name="caption">
+        <string>Flexible Docking</string>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>true</bool>
+    </property>
+    <property name="modal">
+        <bool>false</bool>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="resizeMode">
+            <enum>Fixed</enum>
+        </property>
+        <widget class="QButtonGroup" row="0" column="0">
+            <property name="name">
+                <cstring>m_pMethod</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="title">
+                <string>Intepolation Method</string>
+            </property>
+            <property name="alignment">
+                <set>AlignVCenter</set>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QRadioButton" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_pTPS</cstring>
+                    </property>
+                    <property name="cursor">
+                        <cursor>0</cursor>
+                    </property>
+                    <property name="text">
+                        <string>Thin Plate Spline</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" row="1" column="0">
+                    <property name="name">
+                        <cstring>m_pEBS</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Elastic Body Spline</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" row="2" column="0">
+                    <property name="name">
+                        <cstring>m_pIDW</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Inverse Distance Weighting</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QLayoutWidget" row="2" column="0">
+            <property name="name">
+                <cstring>layout3</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pAdvancedOptionsBtn</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
+                    <property name="text">
+                        <string>Options &gt;&gt;</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>18</width>
+                            <height>17</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>m_pInterpolate</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Interpolate</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>pushButton1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Cancel</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QFrame" row="1" column="0">
+            <property name="name">
+                <cstring>m_pAdvancedFrame</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Plain</enum>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QTabWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_pOptionsTabWidget</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
+                    <widget class="QWidget">
+                        <property name="name">
+                            <cstring>tab</cstring>
+                        </property>
+                        <attribute name="title">
+                            <string>Interpolation</string>
+                        </attribute>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="Line" row="4" column="0" rowspan="2" colspan="4">
+                                <property name="name">
+                                    <cstring>line1_2</cstring>
+                                </property>
+                                <property name="frameShape">
+                                    <enum>HLine</enum>
+                                </property>
+                                <property name="frameShadow">
+                                    <enum>Sunken</enum>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="6" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>m_pCreateIntermediateConformers</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Create Intermediate Conformers</string>
+                                </property>
+                                <property name="checked">
+                                    <bool>false</bool>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="1" column="0">
+                                <property name="name">
+                                    <cstring>m_pElasticityLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Elasticity (nu) x 100:</string>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="5" column="3" rowspan="2" colspan="1">
+                                <item>
+                                    <property name="text">
+                                        <string>10</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>25</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>50</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>100</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>m_pConformersCount</cstring>
+                                </property>
+                                <property name="enabled">
+                                    <bool>false</bool>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="3" column="0">
+                                <property name="name">
+                                    <cstring>m_pWeightingPowLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Weighting Power:</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="2" column="0">
+                                <property name="name">
+                                    <cstring>m_pKernelLabel</cstring>
+                                </property>
+                                <property name="enabled">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="text">
+                                    <string>Kernel:</string>
+                                </property>
+                            </widget>
+                            <widget class="QSpinBox" row="3" column="1">
+                                <property name="name">
+                                    <cstring>m_pWeightingPow</cstring>
+                                </property>
+                                <property name="wrapping">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="buttonSymbols">
+                                    <enum>UpDownArrows</enum>
+                                </property>
+                                <property name="maxValue">
+                                    <number>50</number>
+                                </property>
+                                <property name="minValue">
+                                    <number>1</number>
+                                </property>
+                                <property name="value">
+                                    <number>4</number>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="3" column="2" rowspan="1" colspan="2">
+                                <item>
+                                    <property name="text">
+                                        <string>Hybrid Inverse Distance</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>Pure Inverse Distance</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>m_pWeightingSchema</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="3">
+                                <item>
+                                    <property name="text">
+                                        <string>u(r) = r</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>u(r) = r^2log(r^2)</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>u(r) = r^3</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>m_pKernel</cstring>
+                                </property>
+                                <property name="currentItem">
+                                    <number>0</number>
+                                </property>
+                            </widget>
+                            <widget class="QSpinBox" row="1" column="1" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>m_pElasticity</cstring>
+                                </property>
+                                <property name="wrapping">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="buttonSymbols">
+                                    <enum>UpDownArrows</enum>
+                                </property>
+                                <property name="maxValue">
+                                    <number>50</number>
+                                </property>
+                                <property name="minValue">
+                                    <number>1</number>
+                                </property>
+                                <property name="value">
+                                    <number>1</number>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QWidget">
+                        <property name="name">
+                            <cstring>tab</cstring>
+                        </property>
+                        <attribute name="title">
+                            <string>Other</string>
+                        </attribute>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QButtonGroup" row="0" column="0">
+                                <property name="name">
+                                    <cstring>buttonGroup3_2</cstring>
+                                </property>
+                                <property name="title">
+                                    <string>Refinement</string>
+                                </property>
+                                <widget class="QCheckBox">
+                                    <property name="name">
+                                        <cstring>m_pRefinement_2_2</cstring>
+                                    </property>
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>11</x>
+                                            <y>22</y>
+                                            <width>180</width>
+                                            <height>21</height>
+                                        </rect>
+                                    </property>
+                                    <property name="text">
+                                        <string>Macromolecular Refinement</string>
+                                    </property>
+                                    <property name="checked">
+                                        <bool>false</bool>
+                                    </property>
+                                </widget>
+                            </widget>
+                        </grid>
+                    </widget>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>pushButton1</sender>
+        <signal>clicked()</signal>
+        <receiver>FlexingFullDlg</receiver>
+        <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>m_pInterpolate</sender>
+        <signal>clicked()</signal>
+        <receiver>FlexingFullDlg</receiver>
+        <slot>accept()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>m_pIDW</tabstop>
+    <tabstop>m_pOptionsTabWidget</tabstop>
+    <tabstop>m_pElasticity</tabstop>
+    <tabstop>m_pKernel</tabstop>
+    <tabstop>m_pWeightingPow</tabstop>
+    <tabstop>m_pWeightingSchema</tabstop>
+    <tabstop>m_pCreateIntermediateConformers</tabstop>
+    <tabstop>m_pConformersCount</tabstop>
+    <tabstop>m_pAdvancedOptionsBtn</tabstop>
+    <tabstop>m_pInterpolate</tabstop>
+    <tabstop>pushButton1</tabstop>
+    <tabstop>m_pRefinement_2_2</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in declaration">sculptor_document.h</include>
+</includes>
+<variables>
+    <variable access="public">sculptor_document* m_pTargetDoc;</variable>
+    <variable access="public">sculptor_document* m_pDockDoc;</variable>
+</variables>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

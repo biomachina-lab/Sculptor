@@ -1,0 +1,19 @@
+#!/bin/bash
+
+##################################################################################
+#
+# Sculptor startup script
+#
+# To start sculptor just run this script in a terminal window:
+# ./run_sculptor
+# For a permanent install copy the content from ./lib to /usr/local/lib
+# and from ./bin to /usr/local/bin
+#
+##################################################################################
+
+export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH
+export PATH=./bin:$PATH
+export FONTCONFIG_FILE=/etc/fonts/fonts.conf
+
+./bin/sculptor $@
+

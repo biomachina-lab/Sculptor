@@ -1,0 +1,269 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>VolSelection</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>VolSelection</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>381</width>
+            <height>156</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Selection</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget" row="0" column="0">
+            <property name="name">
+                <cstring>layout1</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Min. X index:</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>m_pMinX</cstring>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget" row="0" column="1">
+            <property name="name">
+                <cstring>layout2</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Max. X index:</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>m_pMaxX</cstring>
+                    </property>
+                    <property name="minValue">
+                        <number>1</number>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget" row="1" column="0">
+            <property name="name">
+                <cstring>layout3</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel2_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Min. Y index:</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>m_pMinY</cstring>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget" row="1" column="1">
+            <property name="name">
+                <cstring>layout4</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel2_3</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Max. Y index:</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>m_pMaxY</cstring>
+                    </property>
+                    <property name="minValue">
+                        <number>1</number>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget" row="2" column="0">
+            <property name="name">
+                <cstring>layout5</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel2_4</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Min. Z index:</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>m_pMinZ</cstring>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget" row="2" column="1">
+            <property name="name">
+                <cstring>layout6</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel2_5</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Max. Z index:</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>m_pMaxZ</cstring>
+                    </property>
+                    <property name="minValue">
+                        <number>1</number>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QPushButton" row="3" column="1">
+            <property name="name">
+                <cstring>m_pCancel</cstring>
+            </property>
+            <property name="text">
+                <string>Cancel</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="3" column="0">
+            <property name="name">
+                <cstring>m_pCrop</cstring>
+            </property>
+            <property name="text">
+                <string>Crop</string>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>m_pMaxY</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>VolSelection</receiver>
+        <slot>setSelection(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pMinX</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>VolSelection</receiver>
+        <slot>setSelection(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pMinY</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>VolSelection</receiver>
+        <slot>setSelection(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pMinZ</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>VolSelection</receiver>
+        <slot>setSelection(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pMaxZ</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>VolSelection</receiver>
+        <slot>setSelection(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pMaxX</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>VolSelection</receiver>
+        <slot>setSelection(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_pCancel</sender>
+        <signal>clicked()</signal>
+        <receiver>VolSelection</receiver>
+        <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>m_pCrop</sender>
+        <signal>clicked()</signal>
+        <receiver>VolSelection</receiver>
+        <slot>crop()</slot>
+    </connection>
+    <connection>
+        <sender>m_pCancel</sender>
+        <signal>clicked()</signal>
+        <receiver>VolSelection</receiver>
+        <slot>cancelCrop()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>m_pMinX</tabstop>
+    <tabstop>m_pMaxX</tabstop>
+    <tabstop>m_pMinY</tabstop>
+    <tabstop>m_pMaxY</tabstop>
+    <tabstop>m_pMinZ</tabstop>
+    <tabstop>m_pMaxZ</tabstop>
+    <tabstop>m_pCrop</tabstop>
+    <tabstop>m_pCancel</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in declaration">situs_document.h</include>
+    <include location="local" impldecl="in implementation">volselection.ui.h</include>
+</includes>
+<variables>
+    <variable>situs_document* m_pSitus;</variable>
+</variables>
+<slots>
+    <slot>setSelection( int )</slot>
+    <slot>crop()</slot>
+    <slot>cancelCrop()</slot>
+</slots>
+<functions>
+    <function>setSitus( situs_document * pSitus )</function>
+</functions>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

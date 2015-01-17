@@ -1,0 +1,632 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>Cartoon_Options</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>Cartoon_Options</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>483</width>
+            <height>435</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Cartoon Properties</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QTabWidget" row="0" column="0">
+            <property name="name">
+                <cstring>tabWidget2</cstring>
+            </property>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Basic Settings</string>
+                </attribute>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QButtonGroup" row="0" column="0">
+                        <property name="name">
+                            <cstring>buttonGroup1</cstring>
+                        </property>
+                        <property name="title">
+                            <string></string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QCheckBox" row="0" column="0">
+                                <property name="name">
+                                    <cstring>checkBoxHelixCylinder</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Show Helices as Cylinders</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>This draws helices as cylinders.</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <spacer row="3" column="0">
+                        <property name="name">
+                            <cstring>spacer6_2</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>20</width>
+                                <height>16</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget class="QButtonGroup" row="2" column="0">
+                        <property name="name">
+                            <cstring>buttonGroup2</cstring>
+                        </property>
+                        <property name="title">
+                            <string></string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLayoutWidget" row="0" column="0">
+                                <property name="name">
+                                    <cstring>layout22</cstring>
+                                </property>
+                                <grid>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QSpinBox" row="1" column="1">
+                                        <property name="name">
+                                            <cstring>spinBoxHelixRes</cstring>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>999999</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>3</number>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="1" column="0">
+                                        <property name="name">
+                                            <cstring>textLabel1_2</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Min Number of Residues per Helix</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>If a helix consists of less residues, it will be rendered as turn.</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QSpinBox" row="0" column="1">
+                                        <property name="name">
+                                            <cstring>spinBoxSheetRes</cstring>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>999999</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>2</number>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="0" column="0">
+                                        <property name="name">
+                                            <cstring>textLabel1</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Min Number of Residues per Sheet</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>If a sheet consists of less residues, it will be rendered as a turn.</string>
+                                        </property>
+                                    </widget>
+                                </grid>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QButtonGroup" row="1" column="0">
+                        <property name="name">
+                            <cstring>buttonGroup8</cstring>
+                        </property>
+                        <property name="title">
+                            <string></string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLayoutWidget" row="0" column="1" rowspan="2" colspan="1">
+                                <property name="name">
+                                    <cstring>layout21</cstring>
+                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QSpinBox">
+                                        <property name="name">
+                                            <cstring>spinBoxTubeCorners</cstring>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>1000</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>3</number>
+                                        </property>
+                                        <property name="value">
+                                            <number>6</number>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLayoutWidget">
+                                        <property name="name">
+                                            <cstring>layout17</cstring>
+                                        </property>
+                                        <grid>
+                                            <property name="name">
+                                                <cstring>unnamed</cstring>
+                                            </property>
+                                            <spacer row="1" column="0">
+                                                <property name="name">
+                                                    <cstring>spacer6</cstring>
+                                                </property>
+                                                <property name="orientation">
+                                                    <enum>Vertical</enum>
+                                                </property>
+                                                <property name="sizeType">
+                                                    <enum>Expanding</enum>
+                                                </property>
+                                                <property name="sizeHint">
+                                                    <size>
+                                                        <width>20</width>
+                                                        <height>44</height>
+                                                    </size>
+                                                </property>
+                                            </spacer>
+                                            <widget class="QSpinBox" row="0" column="0">
+                                                <property name="name">
+                                                    <cstring>spinBoxSheetHelixCorners</cstring>
+                                                </property>
+                                                <property name="maxValue">
+                                                    <number>1000</number>
+                                                </property>
+                                                <property name="minValue">
+                                                    <number>2</number>
+                                                </property>
+                                                <property name="value">
+                                                    <number>4</number>
+                                                </property>
+                                            </widget>
+                                        </grid>
+                                    </widget>
+                                </vbox>
+                            </widget>
+                            <widget class="QLabel" row="1" column="0">
+                                <property name="name">
+                                    <cstring>textLabel2_2</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Number of Corners of Ribbon Cross Section
+   - set to 2 for flat ribbons
+   - set to 4 for rectangular ribbons
+   - set to 6 or higher for round ribbons</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>A high number will make the cartoon look much better but produces a lot more triangles. Even values are recommended.</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="0" column="0">
+                                <property name="name">
+                                    <cstring>textLabel2</cstring>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>0</width>
+                                        <height>30</height>
+                                    </size>
+                                </property>
+                                <property name="text">
+                                    <string>Tube/Cylinder Profile Corners</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>A high number will make the cartoon look much better but produces a lot more triangles. Even values are recommended.</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Advanced Settings</string>
+                </attribute>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QButtonGroup" row="0" column="0">
+                        <property name="name">
+                            <cstring>buttonGroup6</cstring>
+                        </property>
+                        <property name="title">
+                            <string></string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="2">
+                                <property name="name">
+                                    <cstring>checkBoxHelixArrowHeads</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Draw Helices with Arrowheads</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>This draws arrowheads for the helices, too.</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="2">
+                                <property name="name">
+                                    <cstring>checkBoxShader</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Use Vertex/Pixel Shader</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Use of pixel and vertex shaders is very efficient for dynamic scenes.</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="3" column="0" rowspan="1" colspan="2">
+                                <property name="name">
+                                    <cstring>checkBoxPeptidePlanes</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Show Approximated Peptide Planes</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>This shows simply estimated peptide planes.</string>
+                                </property>
+                            </widget>
+                            <spacer row="2" column="0">
+                                <property name="name">
+                                    <cstring>spacer2_2_2_2</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Fixed</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>10</width>
+                                        <height>30</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QCheckBox" row="2" column="1">
+                                <property name="name">
+                                    <cstring>checkBoxPerPixelLighting</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>High Quality Lighting</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>High Quality Lighting will have a small impact on rendering speed. It can only be used in conjunction with Vertex/Pixel Shader.</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QButtonGroup" row="1" column="0">
+                        <property name="name">
+                            <cstring>buttonGroup7</cstring>
+                        </property>
+                        <property name="title">
+                            <string></string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLayoutWidget" row="0" column="2">
+                                <property name="name">
+                                    <cstring>layout20</cstring>
+                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QLineEdit">
+                                        <property name="name">
+                                            <cstring>lineEditCartoonTubeDiameter</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QSpinBox">
+                                        <property name="name">
+                                            <cstring>spinBoxSegments</cstring>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>1000</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>4</number>
+                                        </property>
+                                        <property name="value">
+                                            <number>6</number>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLayoutWidget">
+                                        <property name="name">
+                                            <cstring>layout8</cstring>
+                                        </property>
+                                        <grid>
+                                            <property name="name">
+                                                <cstring>unnamed</cstring>
+                                            </property>
+                                            <widget class="QLineEdit" row="1" column="0">
+                                                <property name="name">
+                                                    <cstring>lineEditCartoonHelixWidth</cstring>
+                                                </property>
+                                            </widget>
+                                            <widget class="QLabel" row="0" column="1">
+                                                <property name="name">
+                                                    <cstring>textLabel3</cstring>
+                                                </property>
+                                                <property name="text">
+                                                    <string>/</string>
+                                                </property>
+                                            </widget>
+                                            <widget class="QLineEdit" row="1" column="2">
+                                                <property name="name">
+                                                    <cstring>lineEditCartoonHelixHeight</cstring>
+                                                </property>
+                                            </widget>
+                                            <widget class="QLineEdit" row="0" column="0">
+                                                <property name="name">
+                                                    <cstring>lineEditCartoonSheetWidth</cstring>
+                                                </property>
+                                            </widget>
+                                            <widget class="QLabel" row="1" column="1">
+                                                <property name="name">
+                                                    <cstring>textLabel3_2</cstring>
+                                                </property>
+                                                <property name="text">
+                                                    <string>/</string>
+                                                </property>
+                                            </widget>
+                                            <widget class="QLineEdit" row="0" column="2">
+                                                <property name="name">
+                                                    <cstring>lineEditCartoonSheetHeight</cstring>
+                                                </property>
+                                            </widget>
+                                        </grid>
+                                    </widget>
+                                </vbox>
+                            </widget>
+                            <widget class="QLayoutWidget" row="0" column="0">
+                                <property name="name">
+                                    <cstring>layout20</cstring>
+                                </property>
+                                <grid>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QLabel" row="3" column="0">
+                                        <property name="name">
+                                            <cstring>textLabel2_2_2_3</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Helix Width / Height</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Set the width and height scaling factor for helices, where width is in the direction of the helix axis and the height corresponds to the thickness of the helices.</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="0" column="0">
+                                        <property name="name">
+                                            <cstring>textLabel2_2_2</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Tube Diameter</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Set the diameter scaling factor for the tube parts.</string>
+                                        </property>
+                                    </widget>
+                                    <spacer row="1" column="1" rowspan="2" colspan="1">
+                                        <property name="name">
+                                            <cstring>spacer2_2</cstring>
+                                        </property>
+                                        <property name="orientation">
+                                            <enum>Horizontal</enum>
+                                        </property>
+                                        <property name="sizeType">
+                                            <enum>Minimum</enum>
+                                        </property>
+                                        <property name="sizeHint">
+                                            <size>
+                                                <width>40</width>
+                                                <height>30</height>
+                                            </size>
+                                        </property>
+                                    </spacer>
+                                    <widget class="QLabel" row="2" column="0">
+                                        <property name="name">
+                                            <cstring>textLabel2_2_2_2</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Sheet Width / Height</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Set the width and height scaling factor for the sheets.</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="1" column="0">
+                                        <property name="name">
+                                            <cstring>textlabel</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Segments per Residue</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Set the number of segments between two consecutive atoms. Increases optical quality but adds quickly very many triangles.</string>
+                                        </property>
+                                    </widget>
+                                </grid>
+                            </widget>
+                            <spacer row="0" column="1">
+                                <property name="name">
+                                    <cstring>spacer2_2_2</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Minimum</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>40</width>
+                                        <height>30</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </grid>
+                    </widget>
+                </grid>
+            </widget>
+        </widget>
+        <spacer row="1" column="0">
+            <property name="name">
+                <cstring>spacer6_2_2</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>16</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QLayoutWidget" row="2" column="0">
+            <property name="name">
+                <cstring>layout13</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>80</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>CloseButton</cstring>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>175</width>
+                            <height>0</height>
+                        </size>
+                    </property>
+                    <property name="text">
+                        <string>Close</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>80</width>
+                            <height>30</height>
+                        </size>
+                    </property>
+                </spacer>
+            </hbox>
+        </widget>
+    </grid>
+</widget>
+<tabstops>
+    <tabstop>tabWidget2</tabstop>
+    <tabstop>checkBoxHelixCylinder</tabstop>
+    <tabstop>spinBoxSheetRes</tabstop>
+    <tabstop>spinBoxHelixRes</tabstop>
+    <tabstop>spinBoxSheetHelixCorners</tabstop>
+    <tabstop>CloseButton</tabstop>
+    <tabstop>checkBoxHelixArrowHeads</tabstop>
+    <tabstop>checkBoxShader</tabstop>
+    <tabstop>checkBoxPeptidePlanes</tabstop>
+    <tabstop>lineEditCartoonTubeDiameter</tabstop>
+    <tabstop>spinBoxSegments</tabstop>
+    <tabstop>lineEditCartoonSheetWidth</tabstop>
+    <tabstop>lineEditCartoonSheetHeight</tabstop>
+    <tabstop>lineEditCartoonHelixWidth</tabstop>
+    <tabstop>lineEditCartoonHelixHeight</tabstop>
+</tabstops>
+<slots>
+    <slot>setMinResPerSheet()</slot>
+    <slot>setMinResPerHelix()</slot>
+    <slot>toggleCartoonPeptidePlanes()</slot>
+    <slot>toggleCartoonHelixArrowheads()</slot>
+    <slot>setCartoonTubeDiameter()</slot>
+    <slot>setCartoonSheetWidth()</slot>
+    <slot>setCartoonSheetHeight()</slot>
+    <slot>setCartoonHelixWidth()</slot>
+    <slot>setCartoonHelixHeight()</slot>
+    <slot>setNewTubeProfileCorners()</slot>
+    <slot>setCartoonSegments()</slot>
+    <slot>toggleCartoonHelixCylinder()</slot>
+    <slot>toggleCartoonShader()</slot>
+    <slot>togglePerPixelLighting()</slot>
+    <slot>setCartoonSheetHelixProfileCorners()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

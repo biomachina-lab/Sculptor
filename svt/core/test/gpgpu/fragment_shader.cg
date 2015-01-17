@@ -1,0 +1,20 @@
+struct FragmentInput
+{
+  float2  texCoord       : TEXCOORD0;
+};
+
+float3 main( FragmentInput IN,
+	     uniform sampler1D InputTex
+	     ) : COLOR
+{
+    float3 pos1 = tex1D(InputTex, IN.texCoord.r);
+    float3 pos2 = tex1D(InputTex, IN.texCoord.s);
+
+    float3 OUT;
+
+    OUT = distance(pos1, pos2);
+
+    //return OUT;
+    return float3(0.1f, 0.2f, 3.0f);
+    //return pos1;
+}

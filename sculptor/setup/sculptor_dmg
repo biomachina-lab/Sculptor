@@ -1,0 +1,239 @@
+#!/bin/sh
+
+###############################################################################
+# Sculptor MacOSX packager
+# see sculptor.biomachina.org for details
+###############################################################################
+
+#
+# checkout sculptor and svt and compile both
+#
+cd $SVT_DIR
+cd ..
+WORK_DIR=`pwd`
+
+echo $WORK_DIR
+
+export SVT_DIR=$WORK_DIR/sculptor_dmg/svt
+
+# cleanup old stuff
+cd $WORK_DIR
+rm -rf sculptor_dmg
+mkdir sculptor_dmg
+cd sculptor_dmg
+
+# checkout
+cvs co svt sculptor
+
+# svt
+cd svt
+qmake
+make
+cd ..
+
+# sculptor
+cd sculptor
+qmake
+make
+
+#
+# Now create bundle
+#
+
+VERSION=`cat $WORK_DIR/sculptor_dmg/sculptor/include/sculptor_version.h | awk '/SCULPTOR_VERSION/ {print $3}' | sed s/\"//g`
+MAJORVERSION=`cat $WORK_DIR/sculptor_dmg/sculptor/include/sculptor_version.h | awk '/SCULPTOR_VERSION/ {print $3}' | sed s/\"//g | sed 's/\./ /' | awk '{print $1}'`
+
+BUNDLE_SOURCE="$WORK_DIR/sculptor_dmg/sculptor/sculptor.app"
+BUNDLE_NAME="sculptor.app"
+DISK_IMAGE="sculptor_${VERSION}.dmg"
+MOUNTED_DISK_NAME="Sculptor ${VERSION}"
+
+#output function
+croak()
+{
+  echo "$1"
+}
+
+#return error message
+chkerror()
+{
+  if [ $? -ne 0 ]
+  then
+    echo "Error!"
+    exit 1
+  fi
+}
+
+# change into build directory
+cd $WORK_DIR/sculptor_dmg/sculptor/
+
+#check binary does not depend on xslt, xml2, or qt
+echo "Checking dependencies..."
+if [ -n "`otool -L sculptor.app/Contents/MacOS/sculptor | egrep '(xslt.dylib|xml2.dylib|libqt.dylib)'`" ]; then
+
+XSLT=`otool -L sculptor.app/Contents/MacOS/sculptor | grep xslt`
+XML2=`otool -L sculptor.app/Contents/MacOS/sculptor | grep xml2`
+QT=`otool -L sculptor.app/Contents/MacOS/sculptor | grep libqt`
+
+echo "Binary is not completely static!"
+echo $XSLT
+echo $XML2
+echo $QT
+exit
+fi
+
+#make sure all resources and frameworks are placed in bundle
+echo "Copying Cg framework into bundle"
+mkdir sculptor.app/Contents/Frameworks 
+cp -R /Library/Frameworks/Cg.framework sculptor.app/Contents/Frameworks
+
+echo "Copy SVT libraries"
+cp -p ../svt/lib/libsvt_system.1.dylib sculptor.app/Contents/Frameworks
+install_name_tool -id @executable_path/../Frameworks/libsvt_system.1.dylib  sculptor.app/Contents/Frameworks/libsvt_system.1.dylib
+install_name_tool -change libsvt_system.1.dylib @executable_path/../Frameworks/libsvt_system.1.dylib sculptor.app/Contents/MacOS/sculptor
+
+cp -p ../svt/lib/libsvt_file_io.1.dylib sculptor.app/Contents/Frameworks
+install_name_tool -id @executable_path/../Frameworks/libsvt_file_io.1.dylib sculptor.app/Contents/Frameworks/libsvt_file_io.1.dylib
+install_name_tool -change libsvt_file_io.1.dylib @executable_path/../Frameworks/libsvt_file_io.1.dylib sculptor.app/Contents/MacOS/sculptor
+
+cp -p ../svt/lib/libsvt_basics.1.dylib sculptor.app/Contents/Frameworks
+install_name_tool -id @executable_path/../Frameworks/libsvt_basics.1.dylib  sculptor.app/Contents/Frameworks/libsvt_basics.1.dylib
+install_name_tool -change libsvt_basics.1.dylib @executable_path/../Frameworks/libsvt_basics.1.dylib sculptor.app/Contents/MacOS/sculptor
+
+cp -p ../svt/lib/libsvt_core.1.dylib sculptor.app/Contents/Frameworks
+install_name_tool -id @executable_path/../Frameworks/libsvt_core.1.dylib    sculptor.app/Contents/Frameworks/libsvt_core.1.dylib
+install_name_tool -change libsvt_core.1.dylib @executable_path/../Frameworks/libsvt_core.1.dylib sculptor.app/Contents/MacOS/sculptor
+
+cp -p ../svt/lib/libsvt_pdb.1.dylib sculptor.app/Contents/Frameworks
+install_name_tool -id @executable_path/../Frameworks/libsvt_pdb.1.dylib     sculptor.app/Contents/Frameworks/libsvt_pdb.1.dylib
+install_name_tool -change libsvt_pdb.1.dylib @executable_path/../Frameworks/libsvt_pdb.1.dylib sculptor.app/Contents/MacOS/sculptor
+
+cp -p ../svt/lib/liblive.1.dylib sculptor.app/Contents/Frameworks
+install_name_tool -id @executable_path/../Frameworks/liblive.1.dylib        sculptor.app/Contents/Frameworks/liblive.1.dylib
+install_name_tool -change liblive.1.dylib @executable_path/../Frameworks/liblive.1.dylib sculptor.app/Contents/MacOS/sculptor
+
+echo "Prep. lib search path: svt_system"
+install_name_tool -change libqt-mt.3.dylib            @executable_path/../Frameworks/libqt-mt.3.dylib          sculptor.app/Contents/Frameworks/libsvt_system.1.dylib
+
+echo "Prep. lib search path: svt_basics"
+install_name_tool -change libqt-mt.3.dylib            @executable_path/../Frameworks/libqt-mt.3.dylib          sculptor.app/Contents/Frameworks/libsvt_basics.1.dylib
+install_name_tool -change libsvt_system.1.dylib       @executable_path/../Frameworks/libsvt_system.1.dylib     sculptor.app/Contents/Frameworks/libsvt_basics.1.dylib
+
+echo "Prep. lib search path: svt_file_io"
+install_name_tool -change libqt-mt.3.dylib            @executable_path/../Frameworks/libqt-mt.3.dylib          sculptor.app/Contents/Frameworks/libsvt_file_io.1.dylib
+install_name_tool -change libsvt_system.1.dylib       @executable_path/../Frameworks/libsvt_system.1.dylib     sculptor.app/Contents/Frameworks/libsvt_file_io.1.dylib
+install_name_tool -change libsvt_basics.1.dylib       @executable_path/../Frameworks/libsvt_basics.1.dylib     sculptor.app/Contents/Frameworks/libsvt_file_io.1.dylib
+
+echo "Prep. lib search path: live"
+install_name_tool -change libqt-mt.3.dylib            @executable_path/../Frameworks/libqt-mt.3.dylib          sculptor.app/Contents/Frameworks/liblive.1.dylib
+install_name_tool -change libsvt_system.1.dylib       @executable_path/../Frameworks/libsvt_system.1.dylib     sculptor.app/Contents/Frameworks/liblive.1.dylib
+install_name_tool -change libsvt_basics.1.dylib       @executable_path/../Frameworks/libsvt_basics.1.dylib     sculptor.app/Contents/Frameworks/liblive.1.dylib
+
+echo "Prep. lib search path: svt_core"
+install_name_tool -change libsvt_basics.1.dylib       @executable_path/../Frameworks/libsvt_basics.1.dylib     sculptor.app/Contents/Frameworks/libsvt_core.1.dylib
+install_name_tool -change libsvt_file_io.1.dylib      @executable_path/../Frameworks/libsvt_file_io.1.dylib    sculptor.app/Contents/Frameworks/libsvt_core.1.dylib
+install_name_tool -change libsvt_system.1.dylib       @executable_path/../Frameworks/libsvt_system.1.dylib     sculptor.app/Contents/Frameworks/libsvt_core.1.dylib
+install_name_tool -change liblive.1.dylib             @executable_path/../Frameworks/liblive.1.dylib           sculptor.app/Contents/Frameworks/libsvt_core.1.dylib
+install_name_tool -change libqt-mt.3.dylib            @executable_path/../Frameworks/libqt-mt.3.dylib          sculptor.app/Contents/Frameworks/libsvt_core.1.dylib
+
+echo "Prep. lib search path: svt_pdb"
+install_name_tool -change libsvt_basics.1.dylib       @executable_path/../Frameworks/libsvt_basics.1.dylib     sculptor.app/Contents/Frameworks/libsvt_pdb.1.dylib
+install_name_tool -change libsvt_file_io.1.dylib      @executable_path/../Frameworks/libsvt_file_io.1.dylib    sculptor.app/Contents/Frameworks/libsvt_pdb.1.dylib
+install_name_tool -change libsvt_system.1.dylib       @executable_path/../Frameworks/libsvt_system.1.dylib     sculptor.app/Contents/Frameworks/libsvt_pdb.1.dylib
+install_name_tool -change libsvt_core.1.dylib         @executable_path/../Frameworks/libsvt_core.1.dylib       sculptor.app/Contents/Frameworks/libsvt_pdb.1.dylib
+install_name_tool -change liblive.1.dylib             @executable_path/../Frameworks/liblive.1.dylib           sculptor.app/Contents/Frameworks/libsvt_pdb.1.dylib
+install_name_tool -change libqt-mt.3.dylib            @executable_path/../Frameworks/libqt-mt.3.dylib          sculptor.app/Contents/Frameworks/libsvt_pdb.1.dylib
+
+echo "Copy Qt library"
+cp $QTDIR/lib/libqt-mt.3.dylib sculptor.app/Contents/Frameworks
+install_name_tool -id @executable_path/../Frameworks/libqt-mt.3.dylib sculptor.app/Contents/Frameworks/libqt-mt.3.dylib
+install_name_tool -change libqt-mt.3.dylib @executable_path/../Frameworks/libqt-mt.3.dylib sculptor.app/Contents/MacOS/sculptor
+
+echo "Copy QWT library"
+cp $QWT_DIR/lib/libqwt.4.dylib sculptor.app/Contents/Frameworks
+install_name_tool -id @executable_path/../Frameworks/libqwt.4.dylib sculptor.app/Contents/Frameworks/libqwt.4.dylib
+install_name_tool -change libqwt.4.dylib @executable_path/../Frameworks/libqwt.4.dylib sculptor.app/Contents/MacOS/sculptor
+
+echo "Prep. lib search path: Qwt"
+install_name_tool -change libqt-mt.3.dylib @executable_path/../Frameworks/libqt-mt.3.dylib sculptor.app/Contents/Frameworks/libqwt.4.dylib
+
+# install_name_tool -id @executable_path/../Frameworks/QtCore.framework/Versions/1.0/Cg sculptor.app/Contents/Frameworks/QtCore.framework/Versions/4.0/QtCore
+
+#make clean bundle, which means removing stuff like CVS directories. 
+#unfortunatley we can't do this using cp so instead we'll make a 
+#copy of the bundle directory, tar it, remove the copy, then untar 
+#it before copying it to the disk image
+#echo "Cleaning bundle..."
+#cp -R sculptor.app sculptor_clean.app
+#tar --exclude 'CVS' --exclude '.xvpics' -cf sculptor_clean.app.tar sculptor_clean.app
+#rm -rf sculptor_clean.app
+#tar -xf sculptor_clean.app.tar
+#rm -f sculptor_clean.app.tar
+
+cd $WORK_DIR
+
+#estimate space required for disk image
+SIZE=`du -s -k $BUNDLE_SOURCE | awk '{print $1}'`
+chkerror
+SIZE=`expr 5 + $SIZE / 1000`
+chkerror
+croak "Using $SIZE MB"
+
+#remove old disk and sparse images if they exist
+rm -f ${DISK_IMAGE}
+rm -rf ${SPARSE_IMAGE}
+
+#create sparse image
+hdiutil create "${DISK_IMAGE}.sparseimage" -volname "${MOUNTED_DISK_NAME}" -megabytes $SIZE -type SPARSE -fs HFS+ 2>/dev/null >/dev/null
+chkerror
+croak "${DISK_IMAGE}.sparseimage created"
+
+#mount sparse image
+hdiutil mount ./${DISK_IMAGE}.sparseimage 2>/dev/null >/dev/null
+#hdid ./${DISK_IMAGE}.sparseimage 2>/dev/null >/dev/null
+chkerror
+croak "${DISK_IMAGE}.sparseimage mounted"
+
+#find out allocated device
+DEV=`mount | grep "Volumes/${MOUNTED_DISK_NAME}" | awk '{print $1}'`
+croak "Device in use is $DEV"
+
+# Use ditto to copy everything to the image, preserving resource forks
+ditto -rsrcFork $BUNDLE_SOURCE "/Volumes/${MOUNTED_DISK_NAME}/${BUNDLE_NAME}" 2>/dev/null >/dev/null
+chkerror
+croak "Bundle coppied over successfully"
+
+# Copy over the disk image background and hide it
+#BACKGROUND="resources/icons/as128.png"
+#ditto -rsrcFork $BACKGROUND "/Volumes/$MOUNTED_DISK_NAME/diskImageBackground.png" 2>/dev/null >/dev/null
+#/Developer/Tools/SetFile -a V "/Volumes/$MOUNTED_DISK_NAME/diskImageBackground.png" 2>/dev/null >/dev/null
+#chkerror
+#croak "Disk image background copied, hide, and set"
+
+# Detach the disk image
+hdiutil detach $DEV 2>/dev/null >/dev/null
+chkerror
+croak "$DEV detached"
+
+# Compress the image (maximum compression)
+hdiutil convert "${DISK_IMAGE}.sparseimage" -format UDZO -o "${DISK_IMAGE}" -imagekey zlib-devel=9 2>/dev/null >/dev/null
+chkerror
+croak "Disk image successfully compressed"
+
+#remove sparseimage folder
+echo "Removing ${DISK_IMAGE}.sparseimage"
+rm -rf ${DISK_IMAGE}.sparseimage
+
+#remove clean app bundle
+#echo "Removing ${BUNDLE_SOURCE}"
+#rm -rf ${BUNDLE_SOURCE}
+
+#make disk image interent enabled and announce being done
+hdiutil internet-enable -yes ${DISK_IMAGE} 2>/dev/null >/dev/null
+# mv ${DISK_IMAGE} ../.
+chkerror
+croak "${DISK_IMAGE} created!"
+
+# cleanup compiled sources
+cd $WORK_DIR
+rm -rf sculptor_dmg

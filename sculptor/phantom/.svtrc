@@ -1,0 +1,19 @@
+Stereo = FALSE
+#
+# Devices
+#
+FeedbackDevice = phantom
+FeedbackMatrixChannel = 1
+FeedbackButtonChannel = 2
+FeedbackForceXChannel = 3
+FeedbackForceYChannel = 4
+FeedbackForceZChannel = 5
+FeedbackTorqueForceXChannel = 6
+FeedbackTorqueForceYChannel = 7
+FeedbackTorqueForceZChannel = 8
+FeedbackForceXTempChannel = 9
+FeedbackForceYTempChannel = 10
+FeedbackForceZTempChannel = 11
+FeedbackTorqueXTempChannel = 12
+FeedbackTorqueYTempChannel = 13
+FeedbackTorqueZTempChannel = 14

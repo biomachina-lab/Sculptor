@@ -1,0 +1,176 @@
+<!DOCTYPE UI><UI>
+<class>HelpDlg</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>HelpDlg</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>616</width>
+            <height>495</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Sculptor Help</string>
+    </property>
+    <property stdset="1">
+        <name>sizeGripEnabled</name>
+        <bool>true</bool>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget>
+            <class>QTextBrowser</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>m_pTextBrowser</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>&lt;HTML&gt; &lt;BODY&gt; &lt;H1&gt;Sculptor&lt;/H1&gt; Dies ist die Online Hilfe zu Sculptor &lt;/BODY&gt; &lt;/HTML&gt;</string>
+            </property>
+            <property stdset="1">
+                <name>source</name>
+                <string></string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout3</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>m_pButtonBack</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Back</string>
+                    </property>
+                    <property stdset="1">
+                        <name>autoDefault</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>m_pButtonForward</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Forward</string>
+                    </property>
+                    <property stdset="1">
+                        <name>autoDefault</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>m_pButtonHome</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Home</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Horizontal Spacing2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>m_pButtonOk</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>&amp;Exit</string>
+                    </property>
+                    <property stdset="1">
+                        <name>autoDefault</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>default</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </vbox>
+</widget>
+<connections>
+    <connection>
+        <sender>m_pButtonOk</sender>
+        <signal>clicked()</signal>
+        <receiver>HelpDlg</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>m_pButtonBack</sender>
+        <signal>clicked()</signal>
+        <receiver>m_pTextBrowser</receiver>
+        <slot>backward()</slot>
+    </connection>
+    <connection>
+        <sender>m_pButtonForward</sender>
+        <signal>clicked()</signal>
+        <receiver>m_pTextBrowser</receiver>
+        <slot>forward()</slot>
+    </connection>
+    <connection>
+        <sender>m_pButtonHome</sender>
+        <signal>clicked()</signal>
+        <receiver>m_pTextBrowser</receiver>
+        <slot>home()</slot>
+    </connection>
+</connections>
+</UI>

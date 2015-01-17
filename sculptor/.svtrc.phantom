@@ -1,0 +1,106 @@
+Stereo = TRUE
+
+#
+# Windows
+#
+WinNum = 1
+Win1PosX = 130
+Win1PosY = 130
+Win1Width = 512
+Win1Height = 512
+Win1Display = voss:0.0
+Win1Fullscreen = TRUE
+
+#
+# Devices
+#
+FeedbackDevice = openhaptics
+ 
+FeedbackMatrixChannel = 1
+FeedbackButtonChannel = 2
+FeedbackForceXChannel = 3
+FeedbackForceYChannel = 4
+FeedbackForceZChannel = 5
+FeedbackTorqueForceXChannel = 6
+FeedbackTorqueForceYChannel = 7
+FeedbackTorqueForceZChannel = 8
+FeedbackForceXTempChannel = 9
+FeedbackForceYTempChannel = 10
+FeedbackForceZTempChannel = 11
+FeedbackTorqueXTempChannel = 12
+FeedbackTorqueYTempChannel = 13
+FeedbackTorqueZTempChannel = 14
+
+
+#Stereo = True
+
+#PointerDevice = space_mouse
+#net_client
+#PointerChannel = 1
+#PointerButtonChannel = 2
+
+## Display Properties  
+
+#Variable Type Default Description 
+#Stereo  Bool  False True = Stereoscopic Mode on  
+#RGBA  Bool  False True = Open Visual with Alpha Channel  
+#Tracker  Bool  False True = Use Position-Tracker (for VR Systems)  
+#WindowTitle  String  SVT String with the title that should appear in the window-decoration  
+
+## Multi-Display Configuration  
+
+#Variable Type Description 
+#WinNum  Int  Number of Windows  
+#WinXFullscreen  Bool  True = Open Window X in Fullscreen Mode  
+#WinXDisplay  String  X11 Display String  
+#WinXWidth  Int  Width of the window (determines the resolution in fullscreen mode)  
+#WinXHeight  Int  Height of the window (determines the resolution in fullscreen mode)  
+#WinXPosX  Int  Horizontal Position of the Window (on the Desktop, not available in Fullscreen-Mode)  
+#WinXPosY  Int  Vertical Position of the Window (on the Desktop, not available in Fullscreen-Mode)  
+#CanvasNum  Int  Number of Canvas (Viewports) in the windows  
+#CanvasXWin  Int  Window in which Canvas X should appear 
+#CanvasXPosX  Int  Horizontal Position of Canvas X within the Window (in Pixels)  
+#CanvasXPosY  Int  Vertical Position of Canvas X within the Window (in Pixels)  
+#CanvasXWidth  Float  Horizontal Percentage that Canvas X occupies of the window (possible values: 0.0 - 1.0)  
+#CanvasXHeight  Float  Vertical Percentage that Canvas X occupies of the window (possible values: 0.0 - 1.0)  
+#CanvasXMatrix  16 Float  Transformation Matrix that should be used before drawing the content into Canvas X (16 float values in one line)  
+#CanvasXWorldWidth  Float  Physical Width of the Canvas X in Meters.  
+#CanvasXWorldHeight  Float  Physical Height of the Canvas X in Meters.  
+
+## Devices  
+
+# stand frueher in live.cfg
+LiveNetClient_ServerAddr = 134.94.173.153
+LiveNetClient_Device = space_mouse
+LiveNetClient_ClientPort = 8001
+#ist in live_net_server.cpp fest eingestellt
+LiveNetClient_ServerPort = 8000
+
+#Variable Type Description 
+#TrackerDevice  String  Name of the L.I.V.E. device that should act as tracker device (e.g. fastrak)  
+#TrackerDevice = space_mouse  
+#TrackerChannel  Int  Number of the L.I.V.E. channel that should deliver the tracker transformation matrix  
+#PointerDevice  String  Name of the L.I.V.E. device that should act as pointer device (e.g. fastrak, or Tracker if it is the same as the Tracker device)  
+#PointerDevice = space_mouse 
+#PointerChannel  Int  Number of the L.I.V.E. channel that should deliver the pointer transformation matrix  
+#PointerButtonChannel  Int  Number of the L.I.V.E. channel that should deliver the pointer button state value  
+
+## Force Feedback Devices  
+
+#Variable Type Description 
+#FeedbackDevice  String  Name of the L.I.V.E. device that should act as force feedback device (e.g. phantom)  
+#FeedbackMatrixChannel  Int  L.I.V.E. channel that should deliver the transformation matrix  
+#FeedbackButtonChannel  Int  L.I.V.E. channel that should deliver the button state value  
+#FeedbackForceXChannel  Int  L.I.V.E. channel that should deliver the x-axis force information 
+#FeedbackForceYChannel  Int  L.I.V.E. channel that should deliver the y-axis force information  
+#FeedbackForceZChannel  Int  L.I.V.E. channel that should deliver the z-axis force information  
+#FeedbackTorqueXChannel  Int  L.I.V.E. channel that should deliver the x-axis torque information 
+#FeedbackTorqueYChannel  Int  L.I.V.E. channel that should deliver the y-axis torque information  
+#FeedbackTorqueZChannel  Int  L.I.V.E. channel that should deliver the z-axis torque information  
+#FeedbackForceXTempChannel  Int  L.I.V.E. channel that should deliver the x-axis force motor temperature information 
+#FeedbackForceYTempChannel  Int  L.I.V.E. channel that should deliver the y-axis force motor temperature information  
+#FeedbackForceZTempChannel  Int  L.I.V.E. channel that should deliver the z-axis force motor temperature information  
+#FeedbackTorqueXTempChannel  Int  L.I.V.E. channel that should deliver the x-axis torque motor temperature information 
+#FeedbackTorqueYTempChannel  Int  L.I.V.E. channel that should deliver the y-axis torque motor temperature information  
+#FeedbackTorqueZTempChannel  Int  L.I.V.E. channel that should deliver the z-axis torque motor temperature information  
+

@@ -1,0 +1,67 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>WaitDlg</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>WaitDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>219</width>
+            <height>70</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Please wait...</string>
+    </property>
+    <hbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>pixmapLabel2</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="frameShape">
+                <enum>NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Plain</enum>
+            </property>
+            <property name="pixmap">
+                <pixmap>image0</pixmap>
+            </property>
+            <property name="scaledContents">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>textLabel1</cstring>
+            </property>
+            <property name="text">
+                <string>&lt;p align="center"&gt;This operation might take some time, 
+please wait...&lt;/p&gt;</string>
+            </property>
+            <property name="alignment">
+                <set>WordBreak|AlignCenter</set>
+            </property>
+        </widget>
+    </hbox>
+</widget>
+<images>
+    <image name="image0">
+        <data format="PNG" length="699">89504e470d0a1a0a0000000d49484452000000300000003008060000005702f98700000282494441546881ed5a318ec2400c1c2727f106248a48fc243f80b450e517a1455b21f102aa2051c11328f913d55e818cf69684ac3771b8936ea4934e17d8f5d863afbd39badd6ef8cb483e6d405ffc137887ebf56a35d70700d2ca01dff83ccf49631f750959ab1b047502442a8e7fe24b75753c22d044a2280acbcf2f974b344bd508b4193f2482091c8f47b198db8c67ef377dc618638d31c17b051160e3ebbab612226d09ecfefd7c3e3f1918632c3f0b25d149a0aeeb176f8592e8d2be0b89d75d741258afd78d3a9044c23f03880844f4f4be6b3c93aeaa2a28798224b45aad5e16b3d6be2591e739f14fd373572a7e34428d070449ec9390ca090096cbe54be9ec5ba94465b42d12a120a21f061b632cffceeb48bc0f449c033e89b61cf1c1c9eb6adf254f4462e381c893b8291221f0a3b5d96c7a9f72a3cc03eec1d5a76d68c268038d565ba1decc71e5e1041e1aaa048aa2b0aed787960fa02821bf65d01a6c5e2270381c1a7b15d7936559067b92bf17a27f3e95df7dd62fb5ad12ea9b7063cc02805042d6da60293425ad5b4edf7d4f02b55b09a0dd607706e80b55022efca41eaa228d7690b1d779160891530846bd5af4a5330489d1ef467d127c52c7223a07dc9a1dd3062f168be7293d994c703a9da272222a023cc3ba8389748d2ccb90248fedeff73bcab2d419ea7d34191b1381fd7e4f5996214d5300409aa6d86eb762121f7d3fb0dbed683e9f63369b613a9d22491271344539e0eabe4bffee6d43d7e4c546bbedc7a0d72abef140d80ccb35bfcbabbc4e4cef249290bb418887242d744c1e018281a6aa2a624f866e26f5a8faad44cc06da6df59f7f43a3fe82431baa047edd44168bd80a130235026cb4a6f1c088139916feff57e2d3f806fc774ca063f788050000000049454e44ae426082</data>
+    </image>
+</images>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

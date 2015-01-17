@@ -1,0 +1,36 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>ClipPropDlg</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>ClipPropDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>152</width>
+            <height>46</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Clip-plane Properties</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QCheckBox" row="0" column="0">
+            <property name="name">
+                <cstring>m_pRectVisible</cstring>
+            </property>
+            <property name="text">
+                <string>Rectangle visible</string>
+            </property>
+            <property name="checked">
+                <bool>true</bool>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

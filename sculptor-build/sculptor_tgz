@@ -1,0 +1,1820 @@
+#!/bin/bash
+
+###################################################################################################
+# Sculptor build script to generate a full tar ball distribution file
+###################################################################################################
+
+function glibctest
+{
+	echo -en "\033[32m"
+	nm $1 | grep @@GLIBC_ | sort -t@ -k3,3 | sed '$!d' | sed -e "s/.*@@ *//"
+        echo -e "\033[0m"
+}
+
+function printError
+{
+	echo -e "\033[31m[ERROR!]\033[0m"
+        echo
+        echo -e "---------------------------------------------------------------------"
+        echo -e "The last 10-lines of the compiler-output (compileOut.txt):"
+        echo
+        cat compileOut.txt | sed -e :a -e '$q;N;11,$D;ba'
+        echo
+        echo -e "---------------------------------------------------------------------"
+        echo -e "And the last 10-lines of the configure-output:"
+        echo
+        cat configureOut.txt | sed -e :a -e '$q;N;11,$D;ba'
+        echo
+        echo -e "---------------------------------------------------------------------"
+        echo
+        exit
+}
+
+###############################################################################
+# Create Directories
+###############################################################################
+function createDir
+{
+	# create directory-structure
+	if [ -e "/data/sculptor_release_build" ]
+	then
+		echo -en "\033[1mCreating     :\033[0m Top-level directory"
+		echo -e "\t \033[32m[FOUND]\033[0m"
+		cd /data/sculptor_release_build
+	else        
+		echo -en "\033[1mCreating     :\033[0m Top-level directory"
+		mkdir -p /data/sculptor_release_build
+		echo -e "\t \033[32m[OK]\033[0m"
+		cd /data/sculptor_release_build
+        fi
+        
+	if [ -e "sculptor_tgz" ]
+	then
+		echo -en "\033[1mCreating     :\033[0m Build directory"
+		echo -e "\t\t \033[32m[FOUND]\033[0m"
+		cd sculptor_tgz
+	else        
+		echo -en "\033[1mCreating     :\033[0m Build directory"
+        	mkdir sculptor_tgz
+		echo -e "\t\t \033[32m[OK]\033[0m"
+		cd sculptor_tgz
+        fi
+
+	# checkout source
+	if [ -e "svt/core" ]
+	then
+		echo -en "\033[1mCreating     :\033[0m SVT source"
+		echo -e "\t\t \033[32m[FOUND]\033[0m"
+        else
+		echo -en "\033[1mCreating     :\033[0m SVT source"
+		cvs -Q co svt
+		echo -e "\t\t \033[32m[OK]\033[0m"
+        fi
+        
+	if [ -e "sculptor" ]
+	then
+		echo -en "\033[1mCreating     :\033[0m Sculptor source"
+		echo -e "\t\t \033[32m[FOUND]\033[0m"
+        else
+		echo -en "\033[1mCreating     :\033[0m Sculptor source"
+		cvs -Q co sculptor
+		echo -e "\t\t \033[32m[OK]\033[0m"
+        fi
+}
+
+###############################################################################
+# Install Protos
+###############################################################################
+function compileProtos
+{
+	echo -en "\033[1mCompiling now:\033[0m Protos"
+
+       	# cvs checkout of xproto
+        if [ -d "xproto" ]
+        then
+      		cd xproto
+                make clean &> /dev/null
+        else
+       		cvs -Q co xproto
+       		cd xproto
+        fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "\t\t\t \033[32m[X]"
+
+      	# cvs checkout randr proto
+        if [ -d "randrproto" ]
+        then
+       		cd randrproto
+                make clean &> /dev/null
+        else
+       		cvs -Q co randrproto
+       		cd randrproto
+       	fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "[RANDR]"
+
+       	# cvs checkout xextproto
+        if [ -d "xextproto" ]
+        then
+       		cd xextproto
+                make clean &> /dev/null
+        else
+      		cvs -Q co xextproto
+       		cd xextproto
+       	fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "[XEXT]"
+
+       	# cvs checkout kbproto
+        if [ -d "kbproto" ]
+        then
+       		cd kbproto
+                make clean &> /dev/null
+        else
+      		cvs -Q co kbproto
+       		cd kbproto
+       	fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "[KB]"
+
+       	# cvs checkout xcmiscproto
+        if [ -d "xcmiscproto" ]
+        then
+       		cd xcmiscproto
+                make clean &> /dev/null
+        else
+      		cvs -Q co xcmiscproto
+       		cd xcmiscproto
+       	fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "[XCM]"
+
+       	# cvs checkout bigreqsproto
+        if [ -d "bigreqsproto" ]
+        then
+       		cd bigreqsproto
+                make clean &> /dev/null
+        else
+      		cvs -Q co bigreqsproto
+       		cd bigreqsproto
+       	fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "[BIGR]"
+
+       	# cvs checkout inputproto
+        if [ -d "inputproto" ]
+        then
+       		cd inputproto
+                make clean &> /dev/null
+        else
+      		cvs -Q co inputproto
+       		cd inputproto
+       	fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "[IN]"
+
+       	# cvs checkout renderproto
+        if [ -d "renderproto" ]
+        then
+       		cd renderproto
+                make clean &> /dev/null
+        else
+      		cvs -Q co renderproto
+       		cd renderproto
+       	fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "[REND]"
+
+       	# cvs checkout fixesproto
+        if [ -d "fixesproto" ]
+        then
+       		cd fixesproto
+                make clean &> /dev/null
+        else
+      		cvs -Q co fixesproto
+       		cd fixesproto
+       	fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "[FIX]"
+
+       	# cvs checkout xineramaproto
+        if [ -d "xineramaproto" ]
+        then
+       		cd xineramaproto
+                make clean &> /dev/null
+        else
+      		cvs -Q co xineramaproto
+       		cd xineramaproto
+       	fi
+       	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR &> configureOut.txt
+       	make install &> /dev/null
+       	cd ..
+       	echo -en "[XINE]"
+
+       	echo -e "\033[0m"
+}
+
+###############################################################################
+# LibSTDC++
+###############################################################################
+function compileSTDC
+{
+	echo -en "\033[1mCompiling now:\033[0m StdC++"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libstdc++.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+        
+        	# cvs checkout
+                if [ -d "gcc" ]
+                then
+                	rm -rf gcc_build &> /dev/null
+			mkdir gcc_build &> /dev/null
+                        cd gcc_build
+                else
+			cvs -Q co gcc
+                        cd gcc
+                        tar jxvf gcc-4.1.1.tar.bz2 &> /dev/null
+                        cd ..
+                        rm -rf gcc_build &> /dev/null
+			mkdir gcc_build &> /dev/null
+                        cd gcc_build
+                fi
+                echo -en "\t\t\t \033[32m[CVS]\033[0m"
+        
+        	# configure
+        	CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS ../gcc/gcc-4.1.1/configure --prefix=/data/sculptor_release_build/sculptor_tgz/ --disable-libssp --enable-static --disable-multilib --disable-sjlj-exceptions &> configureOut.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+
+                # compile
+		make all-target-libstdc++-v3 &> compileOut.txt
+
+		export PARCH=`uname -p`
+		export DIRECT=`ls -d $PARCH-*-linux-gnu`
+
+		if [ -e "$DIRECT/libstdc++-v3/src/.libs/libstdc++.a" ]
+		then
+			cp $DIRECT/libstdc++-v3/src/.libs/libstdc++.a $SVT_DIR/lib/
+        	else
+	  		printError
+          		exit
+		fi
+		if [ -e "gcc/libgcc.a" ]
+		then
+			cp gcc/libgcc.a $SVT_DIR/lib/
+        	else
+	  		printError
+          		exit
+		fi
+		if [ -e "gcc/libgcc_eh.a" ]
+		then
+			cp gcc/libgcc_eh.a $SVT_DIR/lib/
+        	else
+	  		printError
+          		exit
+		fi
+		if [ -e "gcc/libbackend.a" ]
+		then
+			cp gcc/libbackend.a $SVT_DIR/lib/
+        	else
+	  		printError
+          		exit
+		fi
+		if [ -e "gcc/libgcov.a" ]
+		then
+			cp gcc/libgcov.a $SVT_DIR/lib/
+        	else
+	  		printError
+          		exit
+		fi
+		if [ -e "$DIRECT/libstdc++-v3/libsupc++/.libs/libsupc++.a" ]
+		then
+			cp $DIRECT/libstdc++-v3/libsupc++/.libs/libsupc++.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install-target-libstdc++-v3 &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# QT4
+###############################################################################
+function compileQT4
+{
+	echo -en "\033[1mCompiling now:\033[0m Qt4"
+
+	# already compiled?
+	if [ -e "$QTDIR/lib/libQtGui.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+    
+	    	# cvs checkout
+                if [ -d "qt4" ]
+                then
+			cd qt4
+                        make confclean &> /dev/null
+                else
+			cvs -Q co qt4
+			cd qt4
+                fi
+                echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+###############################################################################
+#
+# Qt4 default configuration options and the selected command-line parameter for the configure tool...
+#
+###############################################################################
+#
+# QtDBus module .......... yes (run-time)
+#
+# -no-dbus
+#
+# QtConcurrent code ...... yes
+# QtGui module ........... yes
+# QtScript module ........ yes
+# 
+# -no-script
+# 
+# QtScriptTools module ... yes
+# 
+# -no-scripttools
+# 
+# QtXmlPatterns module ... yes
+# 
+# -no-xmlpatterns
+# 
+# Phonon module .......... no
+# 
+# -no-phonon
+# 
+# Multimedia module ...... auto
+# 
+# -no-multimedia
+# 
+# SVG module ............. yes
+# 
+# -no-svg
+# 
+# WebKit module .......... no
+# 
+# -no-webkit
+# 
+# Declarative module ..... yes
+# 
+# -no-declarative
+# 
+# Declarative debugging ...yes
+# Support for S60 ........ no
+# Symbian DEF files ...... no
+# STL support ............ no
+# PCH support ............ yes
+# MMX/3DNOW/SSE/SSE2/SSE3. yes/yes/yes/yes/yes
+# SSSE3/SSE4.1/SSE4.2..... yes/no/no
+# 
+# -no-sse3
+# 
+# AVX..................... no
+# Graphics System ........ default
+# IPv6 support ........... yes
+# IPv6 ifname support .... yes
+# getaddrinfo support .... yes
+# getifaddrs support ..... yes
+# Accessibility .......... yes
+# NIS support ............ yes
+#
+# -no-nis
+#
+# CUPS support ........... no
+# Iconv support .......... yes
+# Glib support ........... yes
+# GStreamer support ...... no
+# PulseAudio support ..... no
+# Large File support ..... yes
+# GIF support ............ yes
+# 
+# -no-gif
+# 
+# TIFF support ........... yes (system)
+# 
+# -no-libtiff
+# 
+# JPEG support ........... yes (system)
+# 
+# -qt-libjpeg
+# 
+# PNG support ............ yes (system)
+# 
+# -qt-libpng
+# 
+# MNG support ............ yes (system)
+# 
+# -no-mng
+# 
+# zlib support ........... system
+# 
+# -qt-zlib
+# 
+# Session management ..... yes
+#
+# -no-sm
+#
+# OpenGL support ......... yes (Desktop OpenGL)
+# OpenVG support ......... no
+# NAS sound support ...... no
+# XShape support ......... yes
+#
+# -no-xshape
+#
+# XVideo support ......... yes
+#
+# -no-xvideo
+#
+# XSync support .......... yes
+#
+# -no-xsync
+#
+# Xinerama support ....... runtime
+# Xcursor support ........ runtime
+# Xfixes support ......... runtime
+# Xrandr support ......... runtime
+# Xrender support ........ yes
+#
+# -no-xrender
+#
+# Xi support ............. runtime
+# MIT-SHM support ........ yes
+#
+# -no-mitshm
+#
+# FontConfig support ..... yes
+#
+# -no-fontconfig
+#
+# XKB Support ............ yes
+#
+# -no-xkb
+#
+# immodule support ....... yes
+# GTK theme support ...... yes
+# SQLite support ......... plugin (qt)
+# OpenSSL support ........ yes (run-time)
+#
+# -no-openssl
+#
+# Alsa support ........... yes
+# ICD support ............ no
+#
+###############################################################################
+
+		# configure
+		echo QMAKE_CFLAGS_RELEASE+=$SVT_RELEASE_CFLAGS   >> mkspecs/linux-g++/qmake.conf
+		echo QMAKE_CXXFLAGS_RELEASE+=$SVT_RELEASE_CFLAGS >> mkspecs/linux-g++/qmake.conf
+		mkdir include &> /dev/null; cd include && rm -f q*.h; ln -s ../src/*/q*.h .; ln -s ../extensions/*/src/q*.h .; rm q*_p.h ; mkdir private &> /dev/null; cd private && rm -f q*.h; ln -s ../../src/*/q*.h .; ln -s ../../extensions/*/src/q*.h . ; cd ../..
+                # harsh but very portable
+		echo -e "o \n yes" | ./configure -static -no-stl -release -fast -no-qt3support -no-dbus -no-script -no-scripttools -no-xmlpatterns -no-phonon -no-multimedia -no-svg -no-webkit -no-declarative -no-sse3 -no-nis -no-gif -no-libtiff -qt-libjpeg -qt-libpng -no-libmng -qt-zlib -no-sm -no-xshape -no-xvideo -no-xsync -no-mitshm -no-xkb -no-openssl -prefix $QTDIR &> configureOut.txt
+                echo -en "\033[32m[CONF]\033[0m"
+        
+		# compile
+		make sub-src &> compileOut.txt
+
+		if [ -e "$QTDIR/lib/libQtGui.a" ]
+		then
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	          	exit
+		fi
+
+		cd ..
+        fi
+}
+
+###############################################################################
+# QT3
+###############################################################################
+function compileQT3
+{
+	echo -en "\033[1mCompiling now:\033[0m Qt3"
+
+	# already compiled?
+	if [ -e "$QTDIR/lib/libqt-mt.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+    
+	    	# cvs checkout
+                if [ -d "qt3" ]
+                then
+			cd qt3
+                        make clean &> /dev/null
+                else
+			cvs -Q co qt3
+			cd qt3
+                fi
+                echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		echo QMAKE_CFLAGS_RELEASE+=$SVT_RELEASE_CFLAGS   >> mkspecs/linux-g++/qmake.conf
+		echo QMAKE_CXXFLAGS_RELEASE+=$SVT_RELEASE_CFLAGS >> mkspecs/linux-g++/qmake.conf
+		mkdir include &> /dev/null; cd include && rm -f q*.h; ln -s ../src/*/q*.h .; ln -s ../extensions/*/src/q*.h .; rm q*_p.h ; mkdir private &> /dev/null; cd private && rm -f q*.h; ln -s ../../src/*/q*.h .; ln -s ../../extensions/*/src/q*.h . ; cd ../..
+		echo "yes" | ./configure -static -fast -thread -no-stl -enable-opengl -prefix `pwd` &> configureOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+        
+		# compile
+		make sub-src &> compileOut.txt
+
+		if [ -e "$QTDIR/lib/libqt-mt.a" ]
+		then
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	          	exit
+		fi
+
+		cd tools/designer/uic
+		qmake
+		make &> ../../../compileOut.txt
+		cd ../../../..
+        fi
+}
+
+###############################################################################
+# QWT5
+###############################################################################
+function compileQWT5
+{
+	echo -en "\033[1mCompiling now:\033[0m QWT5"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libqwt.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs checkout
+                if [ -d "qwt" ]
+                then
+			cd qwt       
+                        make clean &> /dev/null
+                else
+			cvs -Q co qwt5
+                        ln -s qwt5 qwt
+			cd qwt   
+                        mkdir include
+			mkdir include/qwt
+			cp src/*.h include/qwt/
+                fi
+               	echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		qmake -after "CONFIG+=staticlib" "CONFIG-=dll" "QMAKE_CFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" "QMAKE_CXXFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" &> qmakeOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+
+		if [ -e "lib/libqwt.a" ]
+		then
+			cp lib/libqwt.a $SVT_DIR/lib/
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	          	exit
+		fi
+
+                cd ..
+        fi
+}
+
+###############################################################################
+# QWT
+###############################################################################
+function compileQWT
+{
+	echo -en "\033[1mCompiling now:\033[0m QWT"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libqwt.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs checkout
+                if [ -d "qwt" ]
+                then
+			cd qwt       
+                        make clean &> /dev/null
+                else
+			cvs -Q co qwt
+			cd qwt       
+			mkdir include/qwt
+			cp include/*.h include/qwt/
+                fi
+               	echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		qmake -after "CONFIG+=staticlib" "CONFIG-=dll" "QMAKE_CFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" "QMAKE_CXXFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" &> qmakeOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+
+		if [ -e "lib/libqwt.a" ]
+		then
+			cp lib/libqwt.a $SVT_DIR/lib/
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	          	exit
+		fi
+
+                cd ..
+        fi
+}
+
+###############################################################################
+# MESA
+###############################################################################
+function compileMESA
+{
+	echo -en "\033[1mCompiling now:\033[0m MESA"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libGLU.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+ 
+	 	# cvs checkout
+                if [ -d "mesa" ]
+                then
+			cd mesa 
+                        make realclean &> /dev/null
+                else
+			cvs -Q co mesa
+			cd mesa
+                fi
+                cd bin ; ln -sf minstall install-sh ; cd ..
+               	echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS ./configure --enable-static --disable-asm --disable-gl-osmesa --with-driver=xlib --disable-glut --disable-glw &> configureOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+
+		if [ -e "lib/libGLU.a" ]
+		then
+			cp lib/libGLU.a $SVT_DIR/lib/                        
+                else
+                	printError
+                        exit
+                fi
+                
+		# configure
+                make clean &> /dev/null
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS LDFLAGS=-L$SVT_DIR/lib ./configure --enable-shared --disable-asm --disable-gl-osmesa --with-driver=xlib --disable-glut --disable-glw &> configureOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+
+	        # compile
+		make &> compileOut.txt
+                
+		if [ -e "lib/libGL.so" ]
+		then
+			cp lib/libGL.so $SVT_DIR/lib/
+                        
+                        # repack libGL.a
+                        #cd $SVT_DIR/lib
+                        #mkdir GL  &> /dev/null
+                        #mv libGL.a GL  &> /dev/null
+                        #cd GL 
+                        #ar x libGL.a  &> /dev/null
+                        #ar x libglapi.a  &> /dev/null
+                        #ar x libmesa.a  &> /dev/null
+                        #rm libGL.a  &> /dev/null
+                        #rm libglapi.a  &> /dev/null
+                        #rm libmesa.a  &> /dev/null
+                        #ar q libGL.a *.o &> /dev/null
+                        #mv libGL.a ..  &> /dev/null
+                        #cd ..
+                        #rm -rf GL  &> /dev/null
+		        #cd $TOP_BUILD_DIR/mesa
+                        
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		cd ..
+        fi
+}
+
+###############################################################################
+# FreeType
+###############################################################################
+function compileFreeType
+{
+	echo -en "\033[1mCompiling now:\033[0m FreeType"
+ 
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libfreetype.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+        
+	 	# cvs checkout
+                if [ -d "freetype" ]
+                then
+			cd freetype 
+                        make clean &> /dev/null
+                else
+			cvs -Q co freetype
+			cd freetype
+                fi
+               	echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS ./configure --prefix=$TOP_BUILD_DIR --enable-static  &> configureOut.txt
+                echo -en "\033[32m[CONF]\033[0m"
+
+		# compile
+		make &> compileOut.txt
+
+		if [ -e "objs/.libs/libfreetype.a" ]
+		then
+	                cp objs/.libs/libfreetype.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# Fontconfig
+###############################################################################
+function compileFontConfig
+{
+	echo -en "\033[1mCompiling now:\033[0m Fontconfig"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libfontconfig.a" ]
+	then
+          	echo -e "\t\t \033[32m[OK]\033[0m"
+        else
+        
+		# cvs checkout
+                if [ -d "fontconfig" ]
+                then
+			cd fontconfig 
+                        make clean &> /dev/null
+                else
+			cvs -Q co fontconfig
+			cd fontconfig
+                fi
+	        echo -en "\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+                echo -en "\033[32m[CONF]\033[0m"
+
+		# patch makefile to use the correct config directory for the fonts
+                cd src
+                sed -i 's/${sysconfdir}\/fonts/\/etc\/fonts/g' Makefile
+                cd ..
+                
+                # compile
+		make &> compileOut.txt
+
+		if [ -e "src/.libs/libfontconfig.a" ]
+		then
+			cp src/.libs/libfontconfig.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+	
+        	# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# XTRANS
+###############################################################################
+function compileXTRANS
+{
+	echo -en "\033[1mCompiling now:\033[0m Xtrans"
+
+	# already compiled?
+	if [ -e "$TOP_BUILD_DIR/include/X11/Xtrans/Xtrans.c" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs checkout
+                if [ -d "xtrans" ]
+                then
+			cd xtrans
+                        make clean &> /dev/null
+                else
+			cvs -Q co xtrans
+			cd xtrans
+                fi
+        	echo -en "\t\t\t \033[32m[CVS]\033[0m"
+        
+	        # configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+                echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+		make &> compileOut.txt
+
+		# install
+		make install &> /dev/null
+		cd ..
+
+      		echo -e "\033[32m[OK]\033[0m"
+        fi
+}
+
+###############################################################################
+# XFT
+###############################################################################
+function compileXFT
+{
+	echo -en "\033[1mCompiling now:\033[0m LibXft"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXft.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs checkout
+                if [ -d "libxft" ]
+                then
+			cd libxft
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxft
+			cd libxft
+                fi
+        	echo -en "\t\t\t \033[32m[CVS]\033[0m"
+        
+	        # configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+                echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+		make &> compileOut.txt
+
+		if [ -e "src/.libs/libXft.a" ]
+		then
+			cp src/.libs/libXft.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# Xinerama
+###############################################################################
+function compileXinerama
+{
+	echo -en "\033[1mCompiling now:\033[0m Xinerama"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXinerama.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs checkout
+                if [ -d "libxinerama" ]
+                then
+			cd libxinerama
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxinerama
+			cd libxinerama
+                fi
+	        echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+                echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+		make &> compileOut.txt
+
+		if [ -e "src/.libs/libXinerama.a" ]
+		then
+			cp src/.libs/libXinerama.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# Expat
+###############################################################################
+function compileExpat
+{
+	echo -en "\033[1mCompiling now:\033[0m Expat"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libexpat.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+       
+	       	# cvs checkout
+                if [ -d "expat" ]
+                then
+			cd expat
+                        make clean &> /dev/null
+                else
+			cvs -Q co expat
+			cd expat        
+                fi
+	        echo -en "\t\t\t \033[32m[CVS]\033[0m"
+        
+	        # configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+                echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+
+		if [ -e ".libs/libexpat.a" ]
+		then
+			cp .libs/libexpat.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# ICE
+###############################################################################
+function compileICE
+{
+	echo -en "\033[1mCompiling now:\033[0m LibICE"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libICE.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs checkout
+                if [ -d "libice" ]
+                then
+			cd libice
+                        make clean &> /dev/null
+                else
+			cvs -Q co libice
+			cd libice
+                fi
+	        echo -en "\t\t\t \033[32m[CVS]\033[0m"
+       
+        	# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+
+		if [ -e "src/.libs/libICE.a" ]
+		then
+			cp src/.libs/libICE.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# SM
+###############################################################################
+function compileSM
+{
+	echo -en "\033[1mCompiling now:\033[0m LibSM"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libSM.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+       
+	        # cvs checkout
+                if [ -d "libsm" ]
+                then
+			cd libsm
+                        make clean &> /dev/null
+                else
+			cvs -Q co libsm
+			cd libsm
+                fi
+	        echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+	
+		if [ -e "src/.libs/libSM.a" ]
+		then
+			cp src/.libs/libSM.a $SVT_DIR/lib/
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	        	exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# XT
+###############################################################################
+function compileXT
+{
+	echo -en "\033[1mCompiling now:\033[0m LibXt"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXt.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+	 	# cvs checkout
+                if [ -d "libxt" ]
+                then
+			cd libxt
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxt
+			cd libxt
+                fi
+	        echo -en "\t\t\t \033[32m[CVS]\033[0m"
+	
+	        # configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+
+		# check results
+		if [ -e "src/.libs/libXt.a" ]
+		then
+			cp src/.libs/libXt.a $SVT_DIR/lib/
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+                	printError
+	        	exit
+		fi      
+
+		# install                
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# XMU
+###############################################################################
+function compileXMU
+{
+	echo -en "\033[1mCompiling now:\033[0m LibXmu"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXmu.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+        
+		# cvs checkout
+                if [ -d "libxmu" ]
+                then
+			cd libxmu
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxmu
+			cd libxmu
+                fi
+	        echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+        
+	        # compile
+		make &> compileOut.txt
+	
+		if [ -e "src/.libs/libXmu.a" ]
+		then
+			cp src/.libs/libXmu.a $SVT_DIR/lib/
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	        	exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# XRender
+###############################################################################
+function compileXRender
+{
+	echo -en "\033[1mCompiling now:\033[0m Xrender"
+        
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXrender.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+	 	# cvs checkout
+                if [ -d "libxrender" ]
+                then
+			cd libxrender
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxrender
+			cd libxrender
+                fi
+	        echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+       		make &> compileOut.txt
+
+		if [ -e "src/.libs/libXrender.a" ]
+		then
+			cp src/.libs/libXrender.a $SVT_DIR/lib/
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	        	exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# XRandr
+###############################################################################
+function compileXRandr
+{
+	echo -en "\033[1mCompiling now:\033[0m Xrandr"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXrandr.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+        
+		# cvs checkout libXrandr
+                if [ -d "libxrandr" ]
+                then
+			cd libxrandr
+                        make clean &> /dev/null
+                else
+	       		cvs -Q co libxrandr
+			cd libxrandr
+                fi
+	        echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOutB.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+
+         	# compile
+		make &> compileOut.txt
+
+		if [ -e "src/.libs/libXrandr.a" ]
+		then
+			cp src/.libs/libXrandr.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# XFixes
+###############################################################################
+function compileXFixes
+{
+	echo -en "\033[1mCompiling now:\033[0m Xfixes"
+        
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXfixes.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+        
+        	# cvs checkout
+                if [ -d "libxfixes" ]
+                then
+			cd libxfixes
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxfixes
+			cd libxfixes
+                fi
+	        echo -en "\t\t\t \033[32m[CVS]\033[0m"
+
+		# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+		make &> compileOut.txt
+
+		if [ -e "src/.libs/libXfixes.a" ]
+		then
+			cp src/.libs/libXfixes.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# XCursor
+###############################################################################
+function compileXCursor
+{
+	echo -en "\033[1mCompiling now:\033[0m Xcursor"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXcursor.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+        
+        	# cvs checkout
+                if [ -d "libxcursor" ]
+                then
+			cd libxcursor
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxcursor
+			cd libxcursor
+                fi
+                echo -en "\t\t\t \033[32m[CVS]\033[0m"
+        
+        	# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+		make &> compileOut.txt
+
+		if [ -e "src/.libs/libXcursor.a" ]
+		then
+			cp src/.libs/libXcursor.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# Xau
+###############################################################################
+function compileXau
+{
+	echo -en "\033[1mCompiling now:\033[0m Xau"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXau.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+        
+        	# cvs checkout
+                if [ -d "libxau" ]
+                then
+			cd libxau
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxau
+			cd libxau
+                fi
+                echo -en "\t\t\t \033[32m[CVS]\033[0m"
+        
+        	# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+		make &> compileOut.txt
+
+		if [ -e ".libs/libXau.a" ]
+		then
+			cp .libs/libXau.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# Xext
+###############################################################################
+function compileXext
+{
+	echo -en "\033[1mCompiling now:\033[0m Xext"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXext.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+                
+        	# cvs checkout
+                if [ -d "libxext" ]
+                then
+			cd libxext
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxext
+			cd libxext
+                fi
+                echo -en "\t\t\t \033[32m[CVS]\033[0m"
+        
+        	# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+		make &> compileOut.txt
+
+		if [ -e "src/.libs/libXext.a" ]
+		then
+			cp src/.libs/libXext.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# Xdmcp
+###############################################################################
+function compileXdmcp
+{
+	echo -en "\033[1mCompiling now:\033[0m Xdmcp"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libXdmcp.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+        
+        	# cvs checkout
+                if [ -d "libxdmcp" ]
+                then
+			cd libxdmcp
+                        make clean &> /dev/null
+                else
+			cvs -Q co libxdmcp
+			cd libxdmcp
+                fi
+                echo -en "\t\t\t \033[32m[CVS]\033[0m"
+        
+        	# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --enable-static &> configureOut.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+		make &> compileOut.txt
+
+		if [ -e ".libs/libXdmcp.a" ]
+		then
+			cp .libs/libXdmcp.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+
+		# install
+		make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# X11
+###############################################################################
+function compileX11
+{
+	echo -en "\033[1mCompiling now:\033[0m X11"
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libX11.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+        
+        	# cvs checkout of libx11
+                if [ -d "libx11" ]
+                then
+			cd libx11
+                        make clean &> /dev/null
+                else
+			cvs -Q co libx11
+			cd libx11
+                fi
+                echo -en "\t\t\t \033[32m[CVS]\033[0m"
+        
+        	# configure
+		CFLAGS=$SVT_RELEASE_CFLAGS CXXFLAGS=$SVT_RELEASE_CFLAGS PKG_CONFIG_PATH=$TOP_BUILD_DIR/lib/pkgconfig ./configure --prefix=$TOP_BUILD_DIR --without-xcb --enable-static &> configureOut.txt
+        	echo -en "\033[32m[CONF]\033[0m"
+                
+                # compile
+		make &> compileOut.txt
+
+		if [ -e "src/.libs/libX11.a" ]
+		then
+			cp src/.libs/libX11.a $SVT_DIR/lib/
+	  		echo -e "\033[32m[COMP]\033[0m"
+        	else
+	  		printError
+          		exit
+		fi
+	
+        	# install
+	      	make install &> /dev/null
+		cd ..
+        fi
+}
+
+###############################################################################
+# SVT
+###############################################################################
+function compileSVT
+{
+	echo -en "\033[1mCompiling now\033[0m: SVT..."
+
+	# already compiled?
+	if [ -e "$SVT_DIR/lib/libsvt_lua.a" ]
+	then
+          	echo -e "\t\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs
+		cd svt
+	        echo -en "\t\t\t \033[32m[---]\033[0m"
+        
+		# configure                
+		make distclean &> /dev/null
+	        make distclean &> /dev/null
+	        make distclean &> /dev/null
+		qmake -after "CONFIG+=staticlib" "CONFIG-=dll" "QMAKE_CFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" "QMAKE_CXXFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" &> configureOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+
+		# compile
+		make &> compileOut.txt
+
+		if [ -e "lib/libsvt_lua.a" ]
+		then
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+			printError
+	        	exit
+		fi        
+
+		cd ..
+        fi
+}
+
+###############################################################################
+# Sculptor
+###############################################################################
+function compileSculptor
+{
+	echo -en "\033[1mCompiling now\033[0m: Sculptor..."
+
+	# already compiled?
+	if [ -e "sculptor/sculptor" ]
+	then
+          	echo -e "\t\t \033[32m[OK]\033[0m"
+        else
+
+		# cvs
+		cd sculptor
+	        echo -en "\t\t \033[32m[---]\033[0m"
+        
+	        # configure
+		make distclean &> /dev/null
+		qmake -after "QMAKE_CFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" "QMAKE_CXXFLAGS_RELEASE += $SVT_RELEASE_CFLAGS" "QMAKE_LFLAGS_RELEASE += $SVT_RELEASE_LFLAGS" "LIBS += -lexpat" &> qmakeOut.txt
+	        echo -en "\033[32m[CONF]\033[0m"
+
+		# patch the makefile
+		sed -i 's/-lfontconfig -lfreetype/-lfontconfig -lfreetype -lexpat/g' Makefile
+        
+	        # compile
+		make -j2 &> compileOut.txt
+
+		if [ -e "sculptor" ]
+		then
+			echo -e "\033[32m[COMP]\033[0m"
+	        else
+	        	printError
+	                exit
+		fi      
+       
+	        cd ..
+                echo
+		echo -en "\033[1mGlibc-Test\033[0m   : Highest version Sculptor depends on: "
+	        glibctest sculptor/sculptor
+        fi
+}
+
+###############################################################################
+# Create Distribution Tarball
+###############################################################################
+function createTarball
+{
+	# extract sculptor version
+	cd sculptor
+	export SCLVER=`cat include/sculptor_version.h | awk '/SCULPTOR_VERSION/ {print $3}' | sed s/\"//g`
+        echo
+	echo -e "\033[1mSculptor Ver.:\033[0m $SCLVER"
+	export SCLFILE=sculptor_${SCLVER}_${PROCARCH}
+
+	# compile a clean directory with all the files that should be distributed
+	cd /data/sculptor_release_build
+        rm -rf sculptor_${SCLVER} &> /dev/null
+	mkdir sculptor_${SCLVER}
+        mkdir sculptor_${SCLVER}/lib
+	mkdir sculptor_${SCLVER}/bin
+	# cg
+	echo -e "\033[1mCopying Libs.:\033[0m nVidia-Cg"
+	cp -a /usr/lib${PROCARCH:4:6}/libCg*   sculptor_${SCLVER}/lib/ > /dev/null
+	cp -a /usr/bin/cgc /usr/bin/cginfo      sculptor_${SCLVER}/bin/ > /dev/null
+	# executable
+	echo -e "\033[1mCopying      :\033[0m Executable"
+	cp -av sculptor_tgz/sculptor/sculptor sculptor_${SCLVER}/bin/ > /dev/null
+	# readme
+	echo -e "\033[1mCopying      :\033[0m Readme.txt"
+	cp -av sculptor_tgz/sculptor/Readme.txt sculptor_${SCLVER}/ > /dev/null
+	# startup script
+	echo -e "\033[1mCopying      :\033[0m Startup-Script"
+	cp -av sculptor_tgz/sculptor/build/run_sculptor sculptor_${SCLVER}/ > /dev/null
+	
+	# make tarball
+	echo -en "\033[1mGenerating   :\033[0m Tarball"
+        rm $SCLFILE.tar.gz &> /dev/null
+	tar cvf $SCLFILE.tar sculptor_${SCLVER} > /dev/null
+	gzip $SCLFILE.tar
+        
+        echo -e "\t\t\t \033[32m[DONE]\033[0m"
+        echo
+}
+
+###############################################################################
+# Cleanup
+###############################################################################
+function cleanup
+{
+	echo -e "\033[1mCleaning      :\033[0m Directories..."
+	rm -rf sculptor_tgz
+	rm -rf sculptor_${SCLVER}
+	# remove top level build directory
+	cd $CURR_DIR
+	rm -rf /data/sculptor_release_build
+        
+        echo -e "\033[32m[COMP]\033[0m"
+}
+
+###################################################################################################
+# Main Script
+###################################################################################################
+
+echo 
+echo -e "\033[1mSculptor Linux Distribution Build-Script\033[0m"
+echo "----------------------------------------"
+echo
+echo "The build takes a _very_ long time, depending on the CPU and network speed, ~30min - 1 hour."
+echo
+
+# environment variables
+export CURR_DIR=`pwd`
+export CURR_DATE=`date +%Y-%m-%d`
+export SVT_RELEASE=RELEASE
+export TOP_BUILD_DIR=/data/sculptor_release_build/sculptor_tgz
+export SVT_DIR=$TOP_BUILD_DIR/svt
+export QTDIR=$TOP_BUILD_DIR/qt4
+export QWT_DIR=$TOP_BUILD_DIR/qwt5
+export PATH=$QTDIR/bin:$PATH
+export QMAKESPEC=linux-g++
+export GCCVER=`gcc -dumpversion`
+export PROCARCH=`uname -p`
+export SVT_PLATFORM=release
+
+export SVT_RELEASE_LFLAGS="-Wl,--hash-style=both"
+export SVT_RELEASE_CFLAGS="-O2 -fno-stack-protector -fvisibility=default -fno-visibility-inlines-hidden"
+
+# determine processor architecture
+if [ $PROCARCH = "athlon" ]; then
+	PROCARCH="x86"
+fi
+
+if [ $PROCARCH = "i386" ]; then
+	PROCARCH="x86"
+fi
+
+if [ $PROCARCH = "i586" ]; then
+	PROCARCH="x86"
+fi
+
+if [ $PROCARCH = "i686" ]; then
+	PROCARCH="x86"
+fi
+echo -e "\033[1mCPU Architec.:\033[0m $PROCARCH"
+echo -e "\033[1mSVT_RELEASE  :\033[0m $SVT_RELEASE"
+echo
+
+# make top level dir
+createDir
+cd /data/sculptor_release_build/sculptor_tgz
+
+# cd svt/lib
+# ln -s `g++ -print-file-name=libpthread.a` . &> /dev/null
+# ln -s `g++ -print-file-name=libdl.a` . &> /dev/null
+# cd ../..
+
+# compile protos
+# compileProtos
+# compile xtrans
+# compileXTRANS
+# stlport
+# compileSTDC
+# qt
+compileQT4
+# qwt
+compileQWT5
+# mesa
+# compileMESA
+# freetype
+compileFreeType
+# fontconfig
+compileFontConfig
+# libxft
+# compileXFT
+# expat
+compileExpat
+# libICE
+# compileICE
+# libSM
+# compileSM
+# libXdmcp
+# compileXdmcp
+# libXau
+# compileXau
+# libX11
+# compileX11
+# libXt
+# compileXT
+# libXext
+# compileXext
+# libXmu
+# compileXMU
+# libXrender
+compileXRender
+# libXrandr
+# compileXRandr
+# libXfixes
+# compileXFixes
+# libXcursor
+# compileXCursor
+# libxinerama
+# compileXinerama
+# svt
+compileSVT
+# sculptor
+compileSculptor
+
+# create tarball
+createTarball
+# move tarball to initial start directory
+mv $SCLFILE.tar.gz $CURR_DIR
+# cleanup
+#cleanup
